@@ -1,0 +1,51 @@
+.wrapper{
+    display: flex;
+}
+.container{
+    width: 20%;
+    height: 100vh;
+    background-color: black;
+    margin: 0;
+}
+.mainContent{
+    flex-grow: 1;
+    padding: 20px;
+    width: 80%;
+    
+}
+.mainContent h1{
+    margin:30px 0;
+}
+.accountInfo{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px, 0, 30px, 0;
+}
+hr{
+    margin-top: 5px;
+} 
+
+.paymentTable{
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tableRoot{
+    width: 100%;
+    border-collapse: collapse;
+
+}
+.tableRoot thead th{
+    border-top: none;
+}
+.tableItem{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+.tableItem:first-child{
+    border-left: none;
+}
+.tableItem:last-child{
+    border-right: none;
+}

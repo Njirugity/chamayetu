@@ -1,0 +1,47 @@
+.navbar {
+    width: 100%; /* Full width */
+    border-bottom: 2px solid #ddd; /* Bottom border */
+    background-color: #f8f9fa; /* Light background */
+    padding: 10px 0; 
+}
+
+.navList {
+    list-style: none; /* Remove bullets */
+    display: flex; /* Make horizontal */
+    gap: 20px; /* Add spacing */
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+.navListItem{
+    padding: 5px 10px;
+    /* padding-bottom: 5px; */
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.navListItem:hover{
+    color: #007bff;
+
+}  
+.navListItem.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Space below text */
+  width: 100%;
+  height: 3px;
+  background: #007bff; /* Highlight color */
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+.navList a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px 15px;
+}
+.navList a:hover {
+    color: #007bff; /* Bootstrap primary color */
+}
