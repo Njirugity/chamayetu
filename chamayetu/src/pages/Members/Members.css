@@ -1,0 +1,16 @@
+.dashboardContainer{
+    padding: 10px;
+}
+.title{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.analytics{
+    display: flex;
+    justify-content: space-between;
+    text-align: center; 
+    margin-bottom: 20px;
+}

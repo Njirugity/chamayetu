@@ -1,5 +1,15 @@
+import Header from "../Home/Header";
+import Dashboard from "./MemberDashboard";
+import MemberDetails from "./MemberDetails";
 function Members() {
-  return <h1>Members</h1>;
+  return (
+    <>
+      <Header></Header>
+      <hr></hr>
+      <Dashboard></Dashboard>
+      <MemberDetails></MemberDetails>
+    </>
+  );
 }
 
 export default Members;
