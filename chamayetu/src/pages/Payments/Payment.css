@@ -1,12 +1,7 @@
 .wrapper{
     display: flex;
 }
-.container{
-    width: 20%;
-    height: 100vh;
-    background-color: black;
-    margin: 0;
-}
+
 .mainContent{
     flex-grow: 1;
     padding: 20px;
@@ -23,7 +18,7 @@
 }
 hr{
     margin-top: 5px;
-} 
+}
 
 .paymentTable{
     width: 100%;

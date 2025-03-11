@@ -1,5 +1,5 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "./Home.css";
+import "../pages/Home/Home.css";
 
 function Header() {
   return (

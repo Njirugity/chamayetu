@@ -1,12 +1,11 @@
 import "./Payment.css";
 import PaymentTable from "./PaymentTable";
 import Navbar from "./Navbar";
-import Header from "../Home/Header";
+import Header from "../../components/Header";
 function Payment() {
   return (
     <>
       <div className="wrapper">
-        <div className="container"></div>
         <div className="mainContent">
           <Header></Header>
           <h1>Payments</h1>

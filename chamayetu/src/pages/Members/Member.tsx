@@ -1,4 +1,4 @@
-import Header from "../Home/Header";
+import Header from "../../components/Header";
 import Dashboard from "./MemberDashboard";
 import MemberDetails from "./MemberDetails";
 function Members() {
