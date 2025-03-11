@@ -1,5 +1,14 @@
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "./Home.css";
+import Header from "./Header";
+import Cards from "./Cards";
 function Home() {
-  return <h1>Home</h1>;
+  return (
+    <>
+      <Header></Header>
+      <Cards></Cards>
+    </>
+  );
 }
 
 export default Home;
