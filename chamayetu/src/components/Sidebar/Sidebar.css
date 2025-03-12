@@ -1,0 +1,67 @@
+.sidebar{
+    width: 20%;
+    color: white;
+    overflow: auto;
+    background: black;
+    box-shadow: inset 0 0 10px black;
+    position: fixed;
+    display: inline;
+    overflow: hidden;
+    height: 100%;
+    padding: 2%;
+}
+
+.menu-item{
+    cursor: pointer;
+    flex: auto;
+    flex-direction: row;
+    margin: 3%;
+    padding: 3%;
+    &:hover {
+        background-color: #4a5568; 
+    }
+}
+
+.menu{
+    margin: 4%;
+
+}
+
+.settings{
+    margin-top: 10%;
+    border-top: 2px solid white; 
+    padding-top: 5px;
+}
+
+.btn-new{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 15%;
+    border: 2px solid white;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 50%;
+    text-align: center;
+    margin: 10%;
+}
+
+.settings-btn{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin-top: 10%;
+}
+
+text-gray-400 text-sm bg-gray-800 px-3 py-1 rounded flex items-center"
+
+/* bg-gray-800 px-3 py-1 rounded flex items-center text-sm */
+
+/* flex flex-col space-y-2 */
+
+/* hover:bg-gray-700 p-2 rounded cursor-pointer flex items-center */
+
+/* <div className="w-60 max-w-[14rem] bg-black text-white v-screen p-4 flex flex-col fixed left-0 top-0 shadow-lg overflow-hidden"> */
