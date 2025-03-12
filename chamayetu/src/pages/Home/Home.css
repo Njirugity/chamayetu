@@ -1,6 +1,7 @@
-.header{
+/* .header{
     margin: 20px;
-}
+} */
+
 .nameAndIcons{
     display: flex;
     justify-content: space-between;
