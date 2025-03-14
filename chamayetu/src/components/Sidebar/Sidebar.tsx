@@ -8,7 +8,7 @@ const Sidebar = () => {
   const [menuOpen, setMenuOpen] = useState(true);
 
   const menuItems = [
-    { name: "Home", path: "/" },
+    { name: "Home", path: "/home" },
     { name: "Members", path: "/members" },
     { name: "Payments", path: "/payments" },
     { name: "Contributions", path: "/contributions" },
