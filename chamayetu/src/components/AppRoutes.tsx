@@ -52,7 +52,7 @@ const MainLayout = () => {
 // Layout without Sidebar (for Login page)
 const AuthLayout = () => {
   return (
-    <div className="pages">
+    <div className="auth-pages">
       <Outlet /> {/* This is where child routes will be rendered */}
     </div>
   );
