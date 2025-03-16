@@ -1,13 +1,13 @@
-package com.chamayetu.frinance;
+package com.chamayetu.chamayetu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FrinanceApplication {
+public class chamayetu {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FrinanceApplication.class, args);
+		SpringApplication.run(chamayetu.class, args);
 	}
 
 }
