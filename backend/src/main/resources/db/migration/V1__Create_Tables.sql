@@ -1,5 +1,5 @@
 -- Create members table
-CREATE TABLE IF NOT EXISTS members  (
+CREATE TABLE members  (
     member_id VARCHAR(10) PRIMARY KEY,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -13,19 +13,19 @@ CREATE TABLE IF NOT EXISTS members  (
 );
 
 --Create contributions table
-CREATE TABLE IF NOT EXISTS contributions (
+CREATE TABLE contributions (
     contribution_id SERIAL PRIMARY KEY,
     member_id VARCHAR(10) NOT NULL,
     amount DECIMAL(15,2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total_contributions DECIMAL(15,2) NOT NULL,
     FOREIGN KEY (member_id) REFERENCES members (member_id) ON DELETE CASCADE
 );
 
 
 --Create loans table
-CREATE TABLE IF NOT EXISTS loans (
+CREATE TABLE loans (
     loan_id SERIAL PRIMARY KEY,
     member_id VARCHAR(10) NOT NULL,
     amount DECIMAL(15,2) NOT NULL,
@@ -34,18 +34,18 @@ CREATE TABLE IF NOT EXISTS loans (
     loan_status VARCHAR(50) NOT NULL,
     loan_balance DECIMAL(15,2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (member_id) REFERENCES members (member_id) ON DELETE CASCADE
 );
 
 --Create loan_repayments table
-CREATE TABLE IF NOT EXISTS loan_repayments (
+CREATE TABLE loan_repayments (
     repayment_id SERIAL PRIMARY KEY,
     member_id VARCHAR(10) NOT NULL,
     loan_id INT NOT NULL,
     amount DECIMAL(15,2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (loan_id) REFERENCES loans (loan_id) ON DELETE CASCADE,
     FOREIGN KEY (member_id) REFERENCES members (member_id) ON DELETE CASCADE
 
