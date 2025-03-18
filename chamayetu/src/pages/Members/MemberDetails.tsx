@@ -1,9 +1,10 @@
 import SearchBar from "../../components/Searchbar";
+import "./Members.css";
 function MemberDetails() {
   return (
     <>
+      <SearchBar></SearchBar>
       <div className="membersContainer">
-        <SearchBar></SearchBar>
         <div className="memberTable">
           <table className="tableRoot">
             <thead>

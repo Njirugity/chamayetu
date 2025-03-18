@@ -2,8 +2,7 @@
     width: 20%;
     color: white;
     overflow: auto;
-    background: black;
-    box-shadow: inset 0 0 10px black;
+    background:  linear-gradient(135deg, #222E50, #439A86);
     position: fixed;
     display: inline;
     overflow: hidden;
@@ -18,7 +17,7 @@
     margin: 3%;
     padding: 3%;
     &:hover {
-        background-color: #4a5568; 
+        background: linear-gradient(135deg, #BCD8C1, #439A86); 
     }
 }
 
@@ -29,16 +28,16 @@
 
 .settings{
     margin-top: 10%;
-    border-top: 2px solid white; 
+    border-top: 2px solid #BCD8C1; 
     padding-top: 5px;
 }
 
 .btn-new{
-    background-color: black;
-    color: white;
+    background:  linear-gradient(135deg, #BCD8C1, #439A86);
+    color: #222E50;
     padding: 10px;
-    border-radius: 15%;
-    border: 2px solid white;
+    border-radius: 5px;
+    border: none;
     margin-top: 10px;
     cursor: pointer;
     width: 50%;
@@ -47,11 +46,13 @@
 }
 
 .settings-btn{
-    background-color: black;
-    color: white;
+    background:  linear-gradient(135deg, #BCD8C1, #439A86);
+    color: #222E50;
     padding: 10px;
     cursor: pointer;
     width: 100%;
     text-align: center;
     margin-top: 10%;
+    border-radius: 5px;
+    border: none;
 }

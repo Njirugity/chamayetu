@@ -15,7 +15,10 @@ function Payment() {
             <h3 className="accountName">Account Name and Number</h3>
             <button className="bulkUpload">Upload file</button>
           </div>
-          <button className="filterDate">Dates</button>
+          <button className="filterDate">
+            {" "}
+            Filter Dates <i className="bi bi-chevron-down"></i>
+          </button>
 
           {/* <input>From</input>
       <input>To</input>

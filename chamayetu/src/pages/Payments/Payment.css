@@ -14,7 +14,7 @@
 .accountInfo{
     display: flex;
     justify-content: space-between;
-    margin: 20px, 0, 30px, 0;
+    margin: 30px 0 20px 0;
 }
 hr{
     margin-top: 5px;
@@ -43,4 +43,35 @@ hr{
 }
 .tableItem:last-child{
     border-right: none;
+}
+.bulkUpload{
+    background: linear-gradient(135deg, #222E50, #439A86);
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    
+  }
+.bulkUpload:hover {
+    background: linear-gradient(135deg,#BCD8C1, #222E50);
+    transform: scale(1.05);
+    box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Active (Click) Effect */
+.bulkUpload:active {
+    transform: scale(0.98);
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2);
+}
+.filterDate{
+    background-color: #222E50;
+    color: white;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0 20px 0;
 }
