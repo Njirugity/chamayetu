@@ -1,6 +1,17 @@
 import SearchBar from "../../components/Searchbar";
 import "./Members.css";
-function MemberDetails() {
+
+type Member = {
+  firstname: string;
+  lastname: string;
+  memberId: string;
+  contact: string;
+};
+
+type MemberTableProps = {
+  members: Member[];
+};
+const MemberDetails: React.FC<MemberTableProps> = ({ members }) => {
   return (
     <>
       <SearchBar></SearchBar>
@@ -18,19 +29,21 @@ function MemberDetails() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="tableItem">John Doe</td>
-                <td className="tableItem">001</td>
-                <td className="tableItem">0707090465</td>
-                <td className="tableItem">$30000</td>
-                <td className="tableItem">$55000</td>
-                <td className="tableItem">$5000</td>
-              </tr>
+              {members.map((member, index) => (
+                <tr key={index}>
+                  <td className="tableItem">{member.firstname}</td>
+                  <td className="tableItem">{member.memberId}</td>
+                  <td className="tableItem">{member.contact}</td>
+                  <td className="tableItem">$30000</td>
+                  <td className="tableItem">$55000</td>
+                  <td className="tableItem">$5000</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </div>
     </>
   );
-}
+};
 export default MemberDetails;

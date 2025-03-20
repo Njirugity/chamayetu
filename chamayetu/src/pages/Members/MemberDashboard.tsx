@@ -1,11 +1,16 @@
 import "./Members.css";
+import SidePage from "./MemberForm";
+import { useState } from "react";
+
 function Dashboard() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <>
       <div className="dashboardContainer">
         <div className="title">
           <h4>Members</h4>
-          <button>New Member</button>
+          <button onClick={() => setIsOpen(true)}>New Member</button>
+          {isOpen && <SidePage onClose={() => setIsOpen(false)} />}
         </div>
         <div className="analytics">
           <div className="analyticsItem>">
@@ -34,7 +39,6 @@ function Dashboard() {
             <div className="decor5"></div>
           </div>
         </div>
-        <hr></hr>
       </div>
     </>
   );

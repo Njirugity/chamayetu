@@ -1,54 +1,53 @@
-.dashboardContainer{
-    padding: 10px;
+.dashboardContainer {
+  padding: 10px;
 }
-.title{
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    margin-bottom: 20px;
+.title {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.analytics{
-    display: grid;
+.analytics {
+  display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
   width: 100%;
   padding: 10px;
- 
 }
-.analyticsItem{
-    width: 100px;
+.analyticsItem {
+  width: 100px;
 }
 .decor1 {
   width: 100%;
   height: 10px;
-  background-color: #FFB200;
+  background-color: #ffb200;
 }
 .decor2 {
-    width: 100%;
-    height: 10px;
-    background-color: #EB5B00;
-  }
-  .decor3 {
-    width: 100%;
-    height: 10px;
-    background-color: #D91656;
-  }
-  .decor4 {
-    width: 100%;
-    height: 10px;
-    background-color: #640D5F;
-  }
-  .decor5 {
-    width: 100%;
-    height: 10px;
-    background-color: #5CB338;
-  }
-.membersContainer{
-    margin: 20px;
+  width: 100%;
+  height: 10px;
+  background-color: #eb5b00;
 }
-.dashboardContainer button{
-  background: linear-gradient(135deg, #222E50, #439A86);
+.decor3 {
+  width: 100%;
+  height: 10px;
+  background-color: #d91656;
+}
+.decor4 {
+  width: 100%;
+  height: 10px;
+  background-color: #640d5f;
+}
+.decor5 {
+  width: 100%;
+  height: 10px;
+  background-color: #5cb338;
+}
+.membersContainer {
+  margin: 20px;
+}
+.dashboardContainer button {
+  background: linear-gradient(135deg, #222e50, #439a86);
   color: white;
   padding: 12px 24px;
   font-size: 16px;
@@ -56,16 +55,107 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  
 }
 .dashboardContainer button:hover {
-    background: linear-gradient(135deg,#BCD8C1, #222E50);
-    transform: scale(1.05);
-    box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Active (Click) Effect */
-  .dashboardContainer button:active {
-    transform: scale(0.98);
-    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2);
-  }
+  background: linear-gradient(135deg, #bcd8c1, #222e50);
+  transform: scale(1.05);
+  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dashboardContainer button:active {
+  transform: scale(0.98);
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2);
+}
+.formContainer {
+  padding: 20px;
+  text-align: center;
+}
+.side-page {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100vh;
+  background-color: white;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+}
+.close-btn {
+  display: block;
+  margin-left: auto;
+  padding: 10px;
+  font-size: 14px;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.formContainer {
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* On hover */
+select:hover {
+  border-color: #007bff;
+}
+
+/* When focused */
+select:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
+}
+
+/* Dropdown options */
+select option {
+  padding: 10px;
+  font-size: 14px;
+  background-color: white;
+  color: #333;
+}
+
+/* Customize the dropdown arrow */
+select::-ms-expand {
+  display: none;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bff'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 30px; /* Space for the arrow */
+}
