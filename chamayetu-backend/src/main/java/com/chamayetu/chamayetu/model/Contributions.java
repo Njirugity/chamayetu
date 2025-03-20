@@ -1,6 +1,6 @@
 package com.chamayetu.chamayetu.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,7 +9,6 @@ public class Contributions {
     private Integer created_at ;
     private LocalDateTime date_modified ;
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer contribution_id ;
     private String member_id ;
     private Integer amount ;
