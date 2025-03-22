@@ -58,3 +58,64 @@
 .login-btn:hover {
   background-color: #0f0e0e;
 }
+
+/* Modal Background Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal Box */
+.modal-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 350px;
+  position: relative;
+}
+
+.modal-header {
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.modal-close {
+  cursor: pointer;
+  font-size: 22px;
+  color: red;
+  font-weight: bold;
+}
+
+.modal-content {
+  font-size: 16px;
+  padding: 10px 0;
+}
+
+.modal-ok {
+  margin-top: 15px;
+  padding: 12px 20px;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.modal-ok:hover {
+  background: darkred;
+}
+

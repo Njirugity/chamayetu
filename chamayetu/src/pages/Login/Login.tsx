@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './Login.css';
+import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -7,13 +7,31 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ email, password, remember });
-    // TODO: Handle authentication logic here
-    navigate("/home");
+
+    try {
+      const response = await fetch("http://localhost:8080/rest/members/logon", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.errorMessage || "The credentials used are incorrect, please try again.");
+      }
+
+      // If successful, redirect to home
+      navigate("/home");
+    } catch (error: any) {
+      setError(error.message); // Show error in dialog
+    }
   };
 
   return (
@@ -21,10 +39,6 @@ const Login = () => {
       <div className="login-container">
         <h2 className="text-center text-2xl font-bold mb-6">LOGIN</h2>
         <form onSubmit={handleSubmit} className="login-form">
-          {/* Email Field */}
-          {/* <label className="block mb-2 text-sm font-semibold text-gray-700">
-            Email Address
-          </label> */}
           <input
             type="email"
             className="input-field"
@@ -34,7 +48,6 @@ const Login = () => {
             required
           />
 
-          {/* Remember Me */}
           <div className="flex items-center justify-between mt-3">
             <label className="flex items-center text-sm text-gray-600">
               <input
@@ -43,14 +56,10 @@ const Login = () => {
                 checked={remember}
                 onChange={() => setRemember(!remember)}
               />
-               Remember me
+              Remember me
             </label>
           </div>
 
-          {/* Password Field */}
-          {/* <label className="block mt-4 mb-2 text-sm font-semibold text-gray-700">
-            Password
-          </label> */}
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
@@ -69,22 +78,26 @@ const Login = () => {
             </button>
           </div>
 
-          {/* Forgot Password */}
-          <div className="text-right mt-2">
-            <a href="#" className="text-sm text-blue-600 hover:underline">
-              Forgot Password?
-            </a>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="login-btn"
-          >
+          <button type="submit" className="login-btn">
             Login
           </button>
         </form>
       </div>
+
+      {/* Error Modal */}
+      {error && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <div className="modal-header">
+              <h2>Login failed</h2>
+            </div>
+            <div className="modal-content">
+              <p>⚠ {error}</p>
+            </div>
+            <button className="modal-ok" onClick={() => setError(null)}>OK</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
