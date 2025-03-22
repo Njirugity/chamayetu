@@ -2,12 +2,9 @@ package com.chamayetu.chamayetu.service.impl;
 
 import com.chamayetu.chamayetu.model.Members;
 import com.chamayetu.chamayetu.model.repository.Members_repository;
+import com.chamayetu.chamayetu.pojo.*;
 import com.chamayetu.chamayetu.service.MemberService;
 import com.chamayetu.chamayetu.util.annotation.Facade;
-import com.chamayetu.chamayetu.pojo.ErrorResponse;
-import com.chamayetu.chamayetu.pojo.LoginPOJO;
-import com.chamayetu.chamayetu.pojo.UserProfile;
-import com.chamayetu.chamayetu.pojo.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,7 +82,6 @@ public class MemberServiceImpl implements MemberService {
             userResponse.setEmail(members.get(0).getEmail());
             userResponse.setInd_admin(members.get(0).isIs_admin());
             userResponse.setIs_active(members.get(0).isIs_active());
-//            userResponse.setProfile(members.get(0).getProfile());
             return ResponseEntity.status(HttpStatus.OK).body(userResponse) ;
         }
 
@@ -135,6 +131,36 @@ public class MemberServiceImpl implements MemberService {
         member.setPassword_hash(encoder.encode(userProfile.getPassword()));
         membersRepository.save(member) ;
         return  ResponseEntity.status(HttpStatus.OK).body(member) ;
+    }
+
+    @Override
+    public ResponseEntity<?> logon(LogonPojo logonPOJO) throws Exception {
+        List<Members> members  = membersRepository.findUserByEmail(logonPOJO.getEmail().toLowerCase());
+        if(members.isEmpty()) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setErrorCode(404);
+            errorResponse.setErrorMessage("User not found with email: " + logonPOJO.getEmail());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+
+        final String dbPassword = members.get(0).getPassword_hash() ;
+        final String userPassword = logonPOJO.getPassword() ;
+
+        if (isCorrectPassword(dbPassword, userPassword)) {
+            UserResponse userResponse = new UserResponse() ;
+            userResponse.setMember_no(members.get(0).getMember_id());
+            userResponse.setFirst_name(members.get(0).getFirst_name());
+            userResponse.setLast_name(members.get(0).getLast_name());
+            userResponse.setEmail(members.get(0).getEmail());
+            userResponse.setInd_admin(members.get(0).isIs_admin());
+            userResponse.setIs_active(members.get(0).isIs_active());
+            return ResponseEntity.status(HttpStatus.OK).body(userResponse) ;
+        }
+
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setErrorCode(401);
+        errorResponse.setErrorMessage("The credentials used are incorrect please try again.");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
     }
 
 }

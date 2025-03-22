@@ -4,7 +4,8 @@ import com.chamayetu.chamayetu.pojo.ContributionsPOJO;
 import org.springframework.http.ResponseEntity;
 
 public interface ContributionsService {
-    ResponseEntity<?> getShares(String member_no) throws Exception ;
-    ResponseEntity<?> getTotalShares(String member_no) throws Exception ;
-    ResponseEntity<?> postShares(ContributionsPOJO contributionsPOJO) throws Exception ;
+    ResponseEntity<?> getContributions(String member_no) throws Exception ;
+    ResponseEntity<?> getTotalContributions(String member_no) throws Exception ;
+    ResponseEntity<?> postContribution(ContributionsPOJO contributionsPOJO) throws Exception ;
+    ResponseEntity<?> getAllContributions() throws Exception ;
 }

@@ -1,5 +1,6 @@
 package com.chamayetu.chamayetu.controllers;
 
+import com.chamayetu.chamayetu.pojo.LogonPojo;
 import com.chamayetu.chamayetu.service.MemberService;
 import com.chamayetu.chamayetu.pojo.LoginPOJO;
 import com.chamayetu.chamayetu.pojo.MemberRequest;
@@ -13,22 +14,27 @@ import org.springframework.web.bind.annotation.*;
 public class MembersController {
     @Autowired
     MemberService memberService ;
-    @RequestMapping( path = "getMemberInfo/{member_id}", method = RequestMethod.GET)
+    @GetMapping("getMemberInfo/{member_id}")
     public ResponseEntity<?> getMemberInfo(@PathVariable String member_id) throws Exception {
         return memberService.getMemberInfo(member_id);
     }
 
-    @RequestMapping( path = "getMembers", method = RequestMethod.GET)
+    @GetMapping("getMembers")
     public ResponseEntity<?> getAllMembers() throws Exception {
         return memberService.getMembers();
     }
 
-    @RequestMapping( path = "login", method = RequestMethod.POST)
+    @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody LoginPOJO loginPOJO) throws Exception {
         return memberService.login(loginPOJO);
     }
-    @RequestMapping( path = "register", method = RequestMethod.POST)
+    @PostMapping( "register")
     public ResponseEntity<?> register(@RequestBody UserProfile userProfile) throws Exception {
         return memberService.registerNewUser(userProfile);
+    }
+
+    @PostMapping("logon")
+    public ResponseEntity<?> logon(@RequestBody LogonPojo logonPOJO) throws Exception {
+        return memberService.logon(logonPOJO);
     }
 }
