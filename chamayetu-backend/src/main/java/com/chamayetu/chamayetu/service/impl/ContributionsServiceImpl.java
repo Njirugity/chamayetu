@@ -23,8 +23,9 @@ public class ContributionsServiceImpl implements ContributionsService {
     private Contributions_repository contributionsRepository ;
     @Autowired
     private Members_repository membersRepository ;
+
     @Override
-    public ResponseEntity<?> getShares(String member_id) throws Exception {
+    public ResponseEntity<?> getContributions(String member_id) throws Exception {
         List<Members> members  = membersRepository.fetchUserInfo(member_id);
         if(members.isEmpty()) {
             ErrorResponse errorResponse = new ErrorResponse();
@@ -32,14 +33,13 @@ public class ContributionsServiceImpl implements ContributionsService {
             errorResponse.setErrorMessage("User " + member_id + " does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
-//        List <Totals> totalShares = contributionsRepository.getTotalShares(member_no);
         List <Contributions> contributions = contributionsRepository.fetchUserShares(member_id) ;
         List<Contributions> sharesArrayList = new ArrayList<>(contributions);
         return ResponseEntity.status(HttpStatus.OK).body(sharesArrayList);
     }
 
     @Override
-    public ResponseEntity<?> getTotalShares(String member_id) throws Exception {
+    public ResponseEntity<?> getTotalContributions(String member_id) throws Exception {
         List<Members> members  = membersRepository.fetchUserInfo(member_id);
         if(members.isEmpty()) {
             ErrorResponse errorResponse = new ErrorResponse();
@@ -47,24 +47,36 @@ public class ContributionsServiceImpl implements ContributionsService {
             errorResponse.setErrorMessage("User " + member_id + " does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
-        List <Totals> totalShares = contributionsRepository.getTotalShares(member_id);
+        Totals totalShares = contributionsRepository.getTotalShares(member_id);
         return ResponseEntity.status(HttpStatus.OK).body(totalShares);
     }
 
     @Override
-    public ResponseEntity<?> postShares(ContributionsPOJO contributionsPOJOPOJO) throws Exception {
-        List<Members> members  = membersRepository.fetchUserInfo(contributionsPOJOPOJO.getMember_id().toUpperCase());
+    public ResponseEntity<?> postContribution(ContributionsPOJO contributionsPOJO) throws Exception {
+        List<Members> members  = membersRepository.fetchUserInfo(contributionsPOJO.getMember_id().toUpperCase());
         if(members.isEmpty()) {
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setErrorCode(404);
-            errorResponse.setErrorMessage("User " + contributionsPOJOPOJO.getMember_id().toUpperCase() + " does not exist");
+            errorResponse.setErrorMessage("User " + contributionsPOJO.getMember_id().toUpperCase() + " does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
+        //Get total contributions
+        Totals totalShares = contributionsRepository.getTotalShares(contributionsPOJO.getMember_id().toUpperCase());
+        //Save the contribution
         Contributions contribution = new Contributions();
-        contribution.setMember_id(contributionsPOJOPOJO.getMember_id());
-        contribution.setAmount(contributionsPOJOPOJO.getAmount());
-        contribution.setDate_modified(LocalDateTime.now());
+        contribution.setMember_id(contributionsPOJO.getMember_id());
+        contribution.setAmount(contributionsPOJO.getAmount());
+        contribution.setModified_at(LocalDateTime.now());
+        contribution.setTotal_contributions((int) (totalShares.getTotal() + contributionsPOJO.getAmount()));
+        contribution.setCreated_at(LocalDateTime.now());
         contributionsRepository.save(contribution);
         return ResponseEntity.status(HttpStatus.OK).body(contribution);
     }
+
+    @Override
+    public ResponseEntity<?> getAllContributions() throws Exception {
+        List<Contributions> contributions = (List<Contributions>) contributionsRepository.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(contributions);
+    }
+
 }

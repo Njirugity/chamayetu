@@ -6,28 +6,29 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "contributions")
 public class Contributions {
-    private Integer created_at ;
-    private LocalDateTime date_modified ;
+    private LocalDateTime created_at ;
+    private LocalDateTime modified_at ;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer contribution_id ;
     private String member_id ;
     private Integer amount ;
     private Integer total_contributions ;
 
-    public Integer getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Integer created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public LocalDateTime getDate_modified() {
-        return date_modified;
+    public LocalDateTime getModified_at() {
+        return modified_at;
     }
 
-    public void setDate_modified(LocalDateTime date_modified) {
-        this.date_modified = date_modified;
+    public void setModified_at(LocalDateTime modified_at) {
+        this.modified_at = modified_at;
     }
 
     public Integer getContribution_id() {

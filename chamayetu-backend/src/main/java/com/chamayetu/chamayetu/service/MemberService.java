@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.service;
 
 import com.chamayetu.chamayetu.pojo.LoginPOJO;
+import com.chamayetu.chamayetu.pojo.LogonPojo;
 import com.chamayetu.chamayetu.pojo.UserProfile;
 import org.springframework.http.ResponseEntity;
 
@@ -10,6 +11,6 @@ public interface MemberService {
     ResponseEntity<?> login(LoginPOJO loginPOJO) throws Exception ;
     public boolean isCorrectPassword(String databasePassword, String userProvidedPassword) throws Exception;
     ResponseEntity<?> registerNewUser(UserProfile userProfile) throws Exception ;
-
+    ResponseEntity<?> logon(LogonPojo logonPOJO) throws Exception ;
 
 }
