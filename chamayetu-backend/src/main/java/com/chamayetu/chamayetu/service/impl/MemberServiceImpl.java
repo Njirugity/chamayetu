@@ -31,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
         UserResponse userResponse = new UserResponse() ;
-        userResponse.setMember_no(members.get(0).getMember_id());
+        userResponse.setMember_id(members.get(0).getMember_id());
         userResponse.setFirst_name(members.get(0).getFirst_name());
         userResponse.setLast_name(members.get(0).getLast_name());
         userResponse.setEmail(members.get(0).getEmail());
@@ -47,13 +47,13 @@ public class MemberServiceImpl implements MemberService {
 
         for (Members member : members) {
             UserResponse userResponse = new UserResponse();
-            userResponse.setMember_no(member.getMember_id());
+            userResponse.setMember_id(member.getMember_id());
             userResponse.setFirst_name(member.getFirst_name());
             userResponse.setLast_name(member.getLast_name());
             userResponse.setEmail(member.getEmail());
             userResponse.setInd_admin(member.isIs_admin());
             userResponse.setIs_active(member.isIs_active());
-
+            userResponse.setPhone_number(member.getPhone_number());
             userResponses.add(userResponse);
         }
 
@@ -76,7 +76,7 @@ public class MemberServiceImpl implements MemberService {
 
         if (isCorrectPassword(dbPassword, userPassword)) {
             UserResponse userResponse = new UserResponse() ;
-            userResponse.setMember_no(members.get(0).getMember_id());
+            userResponse.setMember_id(members.get(0).getMember_id());
             userResponse.setFirst_name(members.get(0).getFirst_name());
             userResponse.setLast_name(members.get(0).getLast_name());
             userResponse.setEmail(members.get(0).getEmail());
@@ -148,7 +148,7 @@ public class MemberServiceImpl implements MemberService {
 
         if (isCorrectPassword(dbPassword, userPassword)) {
             UserResponse userResponse = new UserResponse() ;
-            userResponse.setMember_no(members.get(0).getMember_id());
+            userResponse.setMember_id(members.get(0).getMember_id());
             userResponse.setFirst_name(members.get(0).getFirst_name());
             userResponse.setLast_name(members.get(0).getLast_name());
             userResponse.setEmail(members.get(0).getEmail());
