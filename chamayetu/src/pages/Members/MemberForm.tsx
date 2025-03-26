@@ -180,4 +180,19 @@ const MemberForm: React.FC = () => {
   );
 };
 
-export default MemberForm;
+type SidePageProps = {
+  onClose: () => void;
+};
+
+const SidePage: React.FC<SidePageProps> = ({ onClose }) => {
+  return (
+    <div className="side-page">
+      <button className="close-btn" onClick={onClose}>
+        Close
+      </button>
+      <MemberForm />
+    </div>
+  );
+};
+
+export default SidePage;

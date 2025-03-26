@@ -1,49 +1,70 @@
+import { useEffect, useState } from "react";
 import SearchBar from "../../components/Searchbar";
 import "./Members.css";
+import { MemberInfo } from "../../models/Member";
 
-type Member = {
-  firstname: string;
-  lastname: string;
-  memberId: string;
-  contact: string;
-};
 
-type MemberTableProps = {
-  members: Member[];
-};
-const MemberDetails: React.FC<MemberTableProps> = ({ members }) => {
+const MemberDetails: React.FC = () => {
+  const [members, setMembers] = useState<MemberInfo[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/rest/members/getMembers");
+        if (!response.ok) {
+          throw new Error("Failed to fetch members");
+        }
+        const data = await response.json();
+        setMembers(data);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMembers();
+  }, []);
+
   return (
     <>
-      <SearchBar></SearchBar>
+      <SearchBar />
       <div className="membersContainer">
-        <div className="memberTable">
-          <table className="tableRoot">
-            <thead>
-              <tr className="tableHead">
-                <th className="tableItem">Name</th>
-                <th className="tableItem">Member ID</th>
-                <th className="tableItem">Contact</th>
-                <th className="tableItem">Contributions</th>
-                <th className="tableItem">Loan balance</th>
-                <th className="tableItem">Loan limit</th>
-              </tr>
-            </thead>
-            <tbody>
-              {members.map((member, index) => (
-                <tr key={index}>
-                  <td className="tableItem">{member.firstname}</td>
-                  <td className="tableItem">{member.memberId}</td>
-                  <td className="tableItem">{member.contact}</td>
-                  <td className="tableItem">$30000</td>
-                  <td className="tableItem">$55000</td>
-                  <td className="tableItem">$5000</td>
+        {loading && <p>Loading members...</p>}
+        {error && <p className="error">{error}</p>}
+        {!loading && !error && (
+          <div className="memberTable">
+            <table className="tableRoot">
+              <thead>
+                <tr className="tableHead">
+                  <th className="tableItem">Member ID</th>
+                  <th className="tableItem">First Name</th>
+                  <th className="tableItem">Last Name</th>
+                  <th className="tableItem">Contact</th>
+                  <th className="tableItem">Email</th>
+                  <th className="tableItem">Is Active</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {members.map((member, index) => (
+                  <tr key={index}>
+                    <td className="tableItem">{member.member_id}</td>
+                    <td className="tableItem">{member.first_name}</td>
+                    <td className="tableItem">{member.last_name}</td>
+                    <td className="tableItem">{member.phone_number}</td>
+                    <td className="tableItem">{member.email}</td>
+                    <td className="tableItem">{member.is_active ? "Yes" : "No"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </>
   );
 };
+
 export default MemberDetails;
