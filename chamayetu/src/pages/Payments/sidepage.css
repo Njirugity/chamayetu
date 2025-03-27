@@ -1,0 +1,33 @@
+.con-form {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40vw;
+  height: 100vh;
+  background: white;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: linear-gradient(135deg, #222e50, #439a86);
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.close-btn:hover {
+  background: linear-gradient(135deg, #bcd8c1, #222e50);
+  transform: scale(1.05);
+  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.3);
+}

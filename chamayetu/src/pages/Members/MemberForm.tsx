@@ -1,7 +1,18 @@
 import "./Members.css";
-import React, { useState } from "react";
-import { Member } from "../../models/Member";
-import Popup from "../../components/PopUp/PopUp";
+import MemberDetails from "./MemberDetails";
+import React, { useEffect, useState } from "react";
+
+type Member = {
+  first_name: string;
+  last_name: string;
+  member_id: string;
+  phone_number: string;
+  email: string;
+  password: string;
+  confirm_password: string;
+  is_admin: boolean;
+  is_active: boolean;
+};
 
 const MemberForm: React.FC = () => {
   const [members, setMembers] = useState<Member[]>([]);
@@ -17,8 +28,6 @@ const MemberForm: React.FC = () => {
     is_active: true,
   });
 
-  const [popupMessage, setPopupMessage] = useState<string | null>(null);
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -29,9 +38,9 @@ const MemberForm: React.FC = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (
       !formData.first_name ||
       !formData.last_name ||
@@ -39,45 +48,11 @@ const MemberForm: React.FC = () => {
       !formData.phone_number ||
       !formData.email
     ) {
-      setPopupMessage("All fields are required!");
+      alert("All fields are required!");
       return;
     }
-
-    // Check if passwords match
-    if (formData.password !== formData.confirm_password) {
-      setPopupMessage("Passwords do not match!");
-      return;
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setPopupMessage("Please enter a valid email address.");
-      return;
-    }
-  
-    // Post request to register a new member
-    try {
-      const response = await fetch("http://localhost:8080/rest/members/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      console.log("Registration successful:", data);
-      setPopupMessage("Registration successful!");
-    } catch (error) {
-      console.error("Error registering member:", error);
-      setPopupMessage("Error registering member. Please try again.");
-    }
-  
+    console.log(formData);
+    RegisterMember();
     setMembers([...members, formData]);
     setFormData({
       first_name: "",
@@ -91,6 +66,37 @@ const MemberForm: React.FC = () => {
       is_active: true,
     });
   };
+  const RegisterMember = () => {
+    useEffect(() => {
+      const registerMember = async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:8080/rest/members/register",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Registration successful:", data);
+        } catch (error) {
+          console.error("Error registering member:", error);
+        }
+      };
+
+      registerMember();
+    }, []);
+
+    return null;
+  };
 
   return (
     <div className="formContainer">
@@ -99,83 +105,72 @@ const MemberForm: React.FC = () => {
         <input
           type="text"
           placeholder="Enter First Name"
-          name="first_name"
+          name="firstname"
           value={formData.first_name}
           onChange={handleChange}
-          required
         />
-        <label htmlFor="last_name">Last Name</label>
+        <label htmlFor="lastname">Last Name</label>
         <input
           type="text"
           placeholder="Enter Last Name"
-          name="last_name"
+          name="lastname"
           value={formData.last_name}
           onChange={handleChange}
-          required
         />
 
-        <label htmlFor="member_id">Member ID</label>
+        <label htmlFor="memberId">Member ID</label>
         <input
           type="text"
           placeholder="Enter Member ID"
-          name="member_id"
+          name="memberId"
           value={formData.member_id}
           onChange={handleChange}
-          required
         />
 
-        <label htmlFor="phone_number">Phone Number</label>
+        <label htmlFor="contact">Phone Number</label>
         <input
           type="text"
           placeholder="Enter Phone Number"
-          name="phone_number"
+          name="contact"
           value={formData.phone_number}
           onChange={handleChange}
-          required
         />
 
         <label htmlFor="email">Email</label>
         <input
-          type="email"
+          type="text"
           placeholder="Enter Email Address"
           name="email"
           value={formData.email}
           onChange={handleChange}
-          required
         />
         <label htmlFor="password">Password</label>
         <input
-          type="password"
+          type="text"
           placeholder="Enter Password"
-          name="password"
+          name="email"
           value={formData.password}
           onChange={handleChange}
-          required
         />
         <label htmlFor="confirm_password">Confirm Password</label>
         <input
-          type="password"
+          type="text"
           placeholder="Confirm Password"
-          name="confirm_password"
+          name="email"
           value={formData.confirm_password}
           onChange={handleChange}
-          required
         />
-        <label htmlFor="is_admin">Is Admin?</label>
+        <label htmlFor="isAdmin">Is Admin?</label>
         <select
-          name="is_admin"
+          name="isAdmin"
           value={String(formData.is_admin)}
           onChange={handleChange}
-          required
         >
           <option value="false">False</option>
           <option value="true">True</option>
         </select>
         <button type="submit">Submit</button>
       </form>
-
-      {/* Popup Message */}
-      {popupMessage && <Popup message={popupMessage} onClose={() => setPopupMessage(null)} />}
     </div>
   );
 };
