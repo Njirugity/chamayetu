@@ -1,0 +1,64 @@
+.first-page {
+  height: 100vh;
+}
+button {
+  background: #439a86;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+button:hover {
+  background: linear-gradient(135deg, #bcd8c1, #222e50);
+  transform: scale(1.05);
+  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.3);
+}
+.logins {
+  display: flex;
+  justify-content: right;
+  gap: 20px;
+  padding: 20px;
+}
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.infos {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.demo,
+.contact {
+  height: 50px;
+  width: 250px;
+  text-align: left;
+}
+.defination,
+.explanations {
+  width: 50%;
+  text-align: center;
+}
+.members,
+.contribution,
+.loans {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.back-img {
+  width: 50%; /* Adjust width dynamically */
+  height: auto; /* Maintain aspect ratio */
+  /* max-width: 500px;  */
+  object-fit: contain;
+}
+/* .placeholder {
+    width: 50%;
+    height: 100vh;
+    border: solid 1px black;
+  } */

@@ -24,7 +24,10 @@ const Login = () => {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.errorMessage || "The credentials used are incorrect, please try again.");
+        throw new Error(
+          data.errorMessage ||
+            "The credentials used are incorrect, please try again."
+        );
       }
 
       // If successful, redirect to home
@@ -37,51 +40,50 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login-container">
-        <h2 className="text-center text-2xl font-bold mb-6">LOGIN</h2>
-        <form onSubmit={handleSubmit} className="login-form">
-          <input
-            type="email"
-            className="input-field"
-            value={email}
-            placeholder="name@example.com"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-
-          <div className="flex items-center justify-between mt-3">
-            <label className="flex items-center text-sm text-gray-600">
-              <input
-                type="checkbox"
-                className="mr-2"
-                checked={remember}
-                onChange={() => setRemember(!remember)}
-              />
-              Remember me
-            </label>
-          </div>
-
-          <div className="relative">
+        <div className="login-content">
+          <h2 className="text-center text-2xl font-bold mb-6">LOGIN</h2>
+          <form onSubmit={handleSubmit} className="login-form">
             <input
-              type={showPassword ? "text" : "password"}
+              type="email"
               className="input-field"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={email}
+              placeholder="name@example.com"
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button
-              type="button"
-              className="absolute inset-y-0 right-3 flex items-center text-gray-500"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "👁" : "👁‍🗨"}
+            <div className="flex items-center justify-between mt-3">
+              <label className="flex items-center text-sm text-gray-600">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  checked={remember}
+                  onChange={() => setRemember(!remember)}
+                />
+                Remember me
+              </label>
+            </div>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="input-field"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "👁" : "👁‍🗨"}
+              </button>
+            </div>
+            <button type="submit" className="login-btn">
+              Login
             </button>
-          </div>
-
-          <button type="submit" className="login-btn">
-            Login
-          </button>
-        </form>
+          </form>
+        </div>
       </div>
 
       {/* Error Modal */}
@@ -94,7 +96,9 @@ const Login = () => {
             <div className="modal-content">
               <p>⚠ {error}</p>
             </div>
-            <button className="modal-ok" onClick={() => setError(null)}>OK</button>
+            <button className="modal-ok" onClick={() => setError(null)}>
+              OK
+            </button>
           </div>
         </div>
       )}

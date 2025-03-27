@@ -6,7 +6,7 @@ function Header() {
     <>
       <div className="header">
         <div className="nameAndIcons">
-          <h4>Company Name Limited</h4>
+          <h4>Frinance Group</h4>
           <div className="icons">
             <div className="iconContainer">
               <i className="bi bi-info-square"></i>

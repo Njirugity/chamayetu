@@ -1,12 +1,21 @@
+import { useState } from "react";
 import "./Contributions.css";
+import SidePage from "./ContributionsForm";
+
+import { Contribution } from "../../models/Contribution";
+
 function ContribDash() {
+  const [contributions, setContributions] = useState<Contribution[]>([]);
+  const [showForm, setForm] = useState(false);
   return (
     <>
       <div className="contributionDetails">
         <div className="title">
           <h4>Contributions</h4>
-          <button>Recieve Contribution</button>
+          <button onClick={() => setForm(true)}>Recieve Contribution</button>
+          {showForm && <SidePage onClose={() => setForm(false)} />}
         </div>
+
         <hr></hr>
         <div className="contributionsTable">
           <table className="tableRoot">
@@ -20,13 +29,15 @@ function ContribDash() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="tableItem">11/03/2025</td>
-                <td className="tableItem">001</td>
-                <td className="tableItem">John Doe</td>
-                <td className="tableItem">0707090465</td>
-                <td className="tableItem">Recieve Payment</td>
-              </tr>
+              {contributions.map((contrib, index) => (
+                <tr key={index}>
+                  <td className="tableItem">{contrib.date}</td>
+                  <td className="tableItem">{contrib.first_name}</td>
+                  <td className="tableItem">{contrib.last_name}</td>
+                  <td className="tableItem">{contrib.member_id}</td>
+                  <td className="tableItem">{contrib.amount}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

@@ -10,9 +10,9 @@ const Sidebar = () => {
   const menuItems = [
     { name: "Home", path: "/home" },
     { name: "Members", path: "/members" },
-    { name: "Payments", path: "/payments" },
-    { name: "Contributions", path: "/contributions" },
     { name: "Loans", path: "/loans" },
+    { name: "Contributions", path: "/contributions" },
+    { name: "Loand Repayments", path: "/Loan Repayments" },
     { name: "Dashboards", path: "/dashboards" },
     { name: "Settings", path: "/settings" },
     { name: "Logout", path: "/logout" },

@@ -1,52 +1,49 @@
-.dashboardContainer {
-  padding: 10px;
-}
-.title {
+.wrapper {
   display: flex;
-  justify-content: space-between;
-  text-align: center;
-  margin-bottom: 20px;
 }
 
-.analytics {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+.mainContent {
+  flex-grow: 1;
+  padding: 20px;
+  width: 80%;
+}
+.mainContent h1 {
+  margin: 30px 0;
+}
+.accountInfo {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0 20px 0;
+}
+hr {
+  margin-top: 5px;
+}
+
+.paymentTable {
   width: 100%;
+  overflow-x: auto;
+}
+
+.tableRoot {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tableRoot thead th {
+  border-top: none;
+}
+.tableItem {
+  border: 1px solid black;
   padding: 10px;
+  text-align: left;
 }
-.analyticsItem {
-  width: 100px;
+.tableItem:first-child {
+  border-left: none;
 }
-.decor1 {
-  width: 100%;
-  height: 10px;
-  background-color: #ffb200;
+.tableItem:last-child {
+  border-right: none;
 }
-.decor2 {
-  width: 100%;
-  height: 10px;
-  background-color: #eb5b00;
-}
-.decor3 {
-  width: 100%;
-  height: 10px;
-  background-color: #d91656;
-}
-.decor4 {
-  width: 100%;
-  height: 10px;
-  background-color: #640d5f;
-}
-.decor5 {
-  width: 100%;
-  height: 10px;
-  background-color: #5cb338;
-}
-.membersContainer {
-  margin: 20px;
-}
-.dashboardContainer button {
+button,
+.bulkUpload {
   background: linear-gradient(135deg, #222e50, #439a86);
   color: white;
   padding: 12px 24px;
@@ -56,49 +53,28 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
-.dashboardContainer button:hover {
+button:hover,
+.bulkUpload:hover {
   background: linear-gradient(135deg, #bcd8c1, #222e50);
   transform: scale(1.05);
   box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.dashboardContainer button:active {
+/* Active (Click) Effect */
+button:active,
+.bulkUpload:active {
   transform: scale(0.98);
   box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2);
 }
-.formContainer {
-  padding: 20px;
-  text-align: center;
-}
-.side-page {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50vw;
-  height: 100vh;
-  background-color: white;
-  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  transition: transform 0.3s ease-in-out;
-  overflow-y: auto;
-}
-.close-btn {
-  display: block;
-  margin-left: auto;
-  padding: 10px;
-  font-size: 14px;
+.filterDate {
+  background-color: #222e50;
   color: white;
+  padding: 10px 12px;
+  font-size: 16px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  margin: 10px 0 20px 0;
 }
-.formContainer {
-  max-width: 500px;
-  margin: auto;
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
-
 .form {
   display: flex;
   flex-direction: column;
@@ -123,19 +99,19 @@ select {
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-
+/* On hover */
 select:hover {
   border-color: #007bff;
 }
 
-
+/* When focused */
 select:focus {
   outline: none;
   border-color: #0056b3;
   box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
 }
 
-
+/* Dropdown options */
 select option {
   padding: 10px;
   font-size: 14px;
@@ -143,7 +119,7 @@ select option {
   color: #333;
 }
 
-
+/* Customize the dropdown arrow */
 select::-ms-expand {
   display: none;
 }
@@ -156,5 +132,5 @@ select {
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 16px;
-  padding-right: 30px; 
+  padding-right: 30px; /* Space for the arrow */
 }
