@@ -1,18 +1,12 @@
-import { useState } from "react";
 import "./Contributions.css";
-import ConForm from "./Sidepage";
-
 function ContribDash() {
-  const [showForm, setForm] = useState(false);
   return (
     <>
       <div className="contributionDetails">
         <div className="title">
           <h4>Contributions</h4>
-          <button onClick={() => setForm(true)}>Recieve Contribution</button>
-          {showForm && <ConForm onClose={() => setForm(false)} />}
+          <button>Recieve Contribution</button>
         </div>
-
         <hr></hr>
         <div className="contributionsTable">
           <table className="tableRoot">

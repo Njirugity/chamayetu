@@ -1,6 +1,6 @@
 import React from "react";
 import { PopupProps } from "../../models/PopUpProps";
-import "./PopUp.css";
+import "./Popup.css";
 
 const Popup: React.FC<PopupProps> = ({ message, onClose }) => {
   return (
