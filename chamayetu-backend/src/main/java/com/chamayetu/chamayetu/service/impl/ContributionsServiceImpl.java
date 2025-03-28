@@ -67,7 +67,9 @@ public class ContributionsServiceImpl implements ContributionsService {
         contribution.setMember_id(contributionsPOJO.getMember_id());
         contribution.setAmount(contributionsPOJO.getAmount());
         contribution.setModified_at(LocalDateTime.now());
-        contribution.setTotal_contributions((int) (totalShares.getTotal() + contributionsPOJO.getAmount()));
+        contribution.setTotal_contributions(
+                (int) ((totalShares != null ? totalShares.getTotal() : 0) + contributionsPOJO.getAmount())
+        );
         contribution.setCreated_at(LocalDateTime.now());
         contributionsRepository.save(contribution);
         return ResponseEntity.status(HttpStatus.OK).body(contribution);
