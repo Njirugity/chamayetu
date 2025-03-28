@@ -6,9 +6,6 @@ import Popup from "../../components/PopUp/PopUp";
 export const ContributionForm: React.FC = () => {
   const [popupMessage, setPopupMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState<Contribution>({
-    date: "",
-    first_name: "",
-    last_name: "",
     member_id: "",
     amount: 0,
   });
@@ -23,55 +20,54 @@ export const ContributionForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (
-      !formData.date ||
-      !formData.first_name ||
-      !formData.last_name ||
-      !formData.member_id ||
-      !formData.amount
-    ) {
+  
+    if (!formData.member_id || !formData.amount) {
       setPopupMessage("All fields are required!");
       return;
     }
-    // Send data to parent component
-    setPopupMessage(null);
-    setFormData({
-      date: "",
-      first_name: "",
-      last_name: "",
-      member_id: "",
-      amount: 0,
-    });
+  
+    try {
+      const response = await fetch("http://localhost:8080/rest/contributions/postContribution", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json(); // Parse JSON response
+  
+      if (!response.ok) {
+        throw new Error(data.errorMessage || "Failed to submit contribution.");
+      }
+  
+      setPopupMessage("Contribution submitted successfully!");
+  
+      // Reset the form after successful submission
+      setFormData({
+        member_id: "",
+        amount: 0,
+      });
+  
+    } catch (error: unknown) {
+      let errorMessage = "An unexpected error occurred. Please try again.";
+  
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === "object" && error !== null && "message" in error) {
+        errorMessage = String(error.message);
+      }
+  
+      setPopupMessage(errorMessage);
+      console.error("Submission error:", error);
+    }
   };
+  
+  
+  
   return (
     <div className="formContainer">
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="date">Date</label>
-        <input
-          type="text"
-          placeholder="Enter Payment date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-        />
-        <label htmlFor="first_name">First Name</label>
-        <input
-          type="text"
-          placeholder="Enter First Name"
-          name="first_name"
-          value={formData.first_name}
-          onChange={handleChange}
-        />
-        <label htmlFor="lastname">Last Name</label>
-        <input
-          type="text"
-          placeholder="Enter Last Name"
-          name="last_name"
-          value={formData.last_name}
-          onChange={handleChange}
-        />
-
         <label htmlFor="memberId">Member ID</label>
         <input
           type="text"

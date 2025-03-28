@@ -1,7 +1,14 @@
 export type Contribution = {
-  date: string;
-  first_name: string;
-  last_name: string;
   member_id: string;
   amount: number;
+};
+
+
+export type ContributionDashboard = {
+  created_at: string;
+  modified_at: string;
+  contribution_id: number;
+  member_id: string;
+  amount: number;
+  total_contributions: number;
 };
