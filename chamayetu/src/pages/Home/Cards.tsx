@@ -1,30 +1,33 @@
 import "./Home.css";
 import LoansChart from "./LoansChart";
 import ColumnChart from "./ContributionChart";
+import Repaymentchart from "./Repaymentchart";
 function Cards() {
   return (
     <>
       <div className="cardContainer">
-        <div className="shortcut cards">
-          <span>Shortcuts</span>
-          <ul>
+        <div className="cards">
+          <span>Fines</span>
+          <ul className="finesList">
             <li>
-              <i className="bi bi-people"></i>Members
+              <i className="bi bi-person"></i>Brian Njiru
             </li>
+            <li className="rightAlign">300</li>
+            <hr></hr>
             <li>
-              {" "}
-              <i className="bi bi-cash-stack"></i>Record Contribution
+              <i className="bi bi-person"></i>Ian Ngochi
             </li>
+            <li className="rightAlign">1000</li>
+            <hr></hr>
             <li>
-              {" "}
-              <i className="bi bi-cash-stack"></i>Recieve Payment
+              <i className="bi bi-person"></i>Denis Munene
             </li>
+            <li className="rightAlign">1500</li>
+            <hr></hr>
             <li>
-              <i className="bi bi-card-text"></i>Group Documents
+              <i className="bi bi-person-add"></i>Add new
             </li>
-            <li>
-              <i className="bi bi-cash-stack"></i>Record Expense
-            </li>
+            <hr></hr>
           </ul>
         </div>
         <div className="cards">
@@ -64,28 +67,8 @@ function Cards() {
           </ul>
         </div>
         <div className="cards">
-          <span>Fines</span>
-          <ul className="finesList">
-            <li>
-              <i className="bi bi-person"></i>Brian Njiru
-            </li>
-            <li className="rightAlign">300</li>
-            <hr></hr>
-            <li>
-              <i className="bi bi-person"></i>Ian Ngochi
-            </li>
-            <li className="rightAlign">1000</li>
-            <hr></hr>
-            <li>
-              <i className="bi bi-person"></i>Denis Munene
-            </li>
-            <li className="rightAlign">1500</li>
-            <hr></hr>
-            <li>
-              <i className="bi bi-person-add"></i>Add new
-            </li>
-            <hr></hr>
-          </ul>
+          <span>Repayment Rates</span>
+          <Repaymentchart />
         </div>
         <div className="cards">
           <span>Column Analytic</span>

@@ -12,8 +12,7 @@ const Sidebar = () => {
     { name: "Members", path: "/members" },
     { name: "Loans", path: "/loans" },
     { name: "Contributions", path: "/contributions" },
-    { name: "Loand Repayments", path: "/Loan Repayments" },
-    { name: "Dashboards", path: "/dashboards" },
+    { name: "Loan Repayments", path: "/repayments" },
     { name: "Settings", path: "/settings" },
     { name: "Logout", path: "/logout" },
   ];

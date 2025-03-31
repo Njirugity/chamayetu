@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import "./Contributions.css";
-import SidePage from "./ContributionsForm";
-import { ContributionDashboard } from "../../models/Contribution";
+import "../Contributions/Contributions.css";
+import SidePage from "./RepaymentForm";
+import { Repayment } from "../../models/Repayment";
 
-function ContribDash() {
-  const [contributions, setContributions] = useState<ContributionDashboard[]>(
-    []
-  );
+function RepaymentTable() {
+  const [repayments, setRepayments] = useState<Repayment[]>([]);
   const [showForm, setForm] = useState(false);
 
   const formatDate = (isoDate: string) => {
@@ -19,34 +17,34 @@ function ContribDash() {
     });
   };
 
-  // Fetch contributions from API when component mounts
+  // Fetch repayments from API when component mounts
   useEffect(() => {
-    const fetchContributions = async () => {
+    const fetchRepayment = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/rest/contributions/allContributions"
+          "http://localhost:8080/rest/repayments/allRepayment"
         );
 
         if (!response.ok) {
-          throw new Error("Failed to fetch contributions");
+          throw new Error("Failed to fetch repayments");
         }
 
-        const data: ContributionDashboard[] = await response.json();
-        setContributions(data);
+        const data: Repayment[] = await response.json();
+        setRepayments(data);
       } catch (error) {
-        console.error("Error fetching contributions:", error);
+        console.error("Error fetching repayments:", error);
       }
     };
 
-    fetchContributions();
+    fetchRepayment();
   }, []); // Empty dependency array ensures this runs once on mount
 
   return (
     <>
       <div className="contributionDetails">
         <div className="title">
-          <h4>Contributions</h4>
-          <button onClick={() => setForm(true)}>Receive Contribution</button>
+          <h4>Loan Repayemts</h4>
+          <button onClick={() => setForm(true)}>Receive Repayment</button>
           {showForm && <SidePage onClose={() => setForm(false)} />}
         </div>
 
@@ -54,22 +52,23 @@ function ContribDash() {
           <table className="tableRoot">
             <thead>
               <tr className="tableHead">
-                <th className="tableItem">Contribution Date</th>
                 <th className="tableItem">Member ID</th>
-                <th className="tableItem">Amount</th>
-                <th className="tableItem">Total Contributions</th>
+                <th className="tableItem">Loan Amount</th>
+                <th className="tableItem">Amount Due</th>
+                <th className="tableItem">Total Interest</th>
+                <th className="tableItem">Due Date</th>
+                <th className="tableItem">Amount Paid</th>
+                <th className="tableItem">Loan Balance</th>
               </tr>
             </thead>
             <tbody>
-              {contributions.length > 0 ? (
-                contributions.map((contrib, index) => (
+              {repayments.length > 0 ? (
+                repayments.map((contrib, index) => (
                   <tr key={index}>
-                    <td className="tableItem">
-                      {formatDate(contrib.created_at)}
-                    </td>
+                    {/* <td className="tableItem">{formatDate(contrib.created_at)}</td> */}
                     <td className="tableItem">{contrib.member_id}</td>
                     <td className="tableItem">{contrib.amount}</td>
-                    <td className="tableItem">{contrib.total_contributions}</td>
+                    {/* <td className="tableItem">{contrib.total_contributions}</td> */}
                   </tr>
                 ))
               ) : (
@@ -87,4 +86,4 @@ function ContribDash() {
   );
 }
 
-export default ContribDash;
+export default RepaymentTable;

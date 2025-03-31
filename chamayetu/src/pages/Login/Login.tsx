@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
+    <div className="login-page">
       <div className="login-container">
         <div className="login-content">
           <h2 className="text-center text-2xl font-bold mb-6">LOGIN</h2>

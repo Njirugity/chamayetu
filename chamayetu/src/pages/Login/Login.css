@@ -1,11 +1,11 @@
-/* .login {
-  background-image: url("../../assets/images/loginBackground.jpg"); 
+.login-page {
+  background-image: url("../../assets/images/loginBackground.jpg");
   background-size: cover;
-  background-position: center; 
-  background-repeat: no-repeat; 
-  height: 100vh; 
-  width: 100%; 
-} */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+}
 
 .login-container {
   width: 50%;
@@ -127,4 +127,41 @@
 
 .modal-ok:hover {
   background: darkred;
+}
+.signup-page {
+  background-image: url("../../assets/images/loginBackground.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+}
+.signup-cont {
+  display: flex;
+  height: 100vh;
+  text-align: center;
+  width: 50%;
+  border: solid gray 1px;
+  border-radius: 50px 0 0 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #222e50, #439a86);
+  color: white;
+}
+.signup-content {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  width: 100%;
+}
+input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.submit-btn {
+  margin-top: 20px;
+  background-color: #222e50;
 }

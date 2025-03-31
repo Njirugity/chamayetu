@@ -4,6 +4,7 @@ function Contributions() {
   return (
     <>
       <Header></Header>
+      <hr></hr>
       <ContribDash></ContribDash>
     </>
   );

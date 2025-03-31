@@ -1,18 +1,40 @@
+import { useNavigate } from "react-router-dom";
 import memberRegistrion from "./images/memberRegistration.png";
 import "./landing.css";
+
 function LandingPage() {
+  const navigate = useNavigate();
+  const login = useNavigate();
+  const signup = useNavigate();
+
+  const handleDemo = () => {
+    navigate("/home");
+  };
+  const handleLogin = () => {
+    login("/login");
+  };
+  const handleSignup = () => {
+    signup("/signup");
+  };
+
   return (
     <>
       <div className="mainContainer">
         <div className="first-page">
           <div className="logins">
-            <button className="login">Login</button>
-            <button className="signup">Sign Up</button>
+            <button onClick={handleLogin} className="login">
+              Login
+            </button>
+            <button onClick={handleSignup} className="signup">
+              Sign Up
+            </button>
           </div>
           <div className="intro">
             <h1 className="title">chamayetu</h1>
             <div className="infos">
-              <button className="demo">Request Demo</button>
+              <button onClick={handleDemo} className="demo">
+                Try Demo
+              </button>
               <button className="contact">Contact us</button>
             </div>
             <p className="defination">
