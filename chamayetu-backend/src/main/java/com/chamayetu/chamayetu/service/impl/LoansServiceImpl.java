@@ -11,11 +11,15 @@ import com.chamayetu.chamayetu.pojo.Totals;
 import com.chamayetu.chamayetu.service.LoansService;
 import com.chamayetu.chamayetu.util.annotation.Facade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Facade
 public class LoansServiceImpl implements LoansService {
@@ -25,6 +29,9 @@ public class LoansServiceImpl implements LoansService {
     private Contributions_repository contributionsRepository ;
     @Autowired
     private Members_repository membersRepository ;
+    @Autowired
+    private Environment env;
+
     @Override
     public ResponseEntity<?> getLoans(String member_no) throws Exception {
         List<Members> members  = membersRepository.fetchUserInfo(member_no);
@@ -40,38 +47,62 @@ public class LoansServiceImpl implements LoansService {
     }
 
     @Override
-    public ResponseEntity<?> getTotalLoans(String member_no) throws Exception {
-        List<Members> members  = membersRepository.fetchUserInfo(member_no);
+    public ResponseEntity<?> getTotalLoans(String member_id) throws Exception {
+        List<Members> members  = membersRepository.fetchUserInfo(member_id);
         if(members.isEmpty()) {
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setErrorCode(404);
-            errorResponse.setErrorMessage("User " + member_no.toUpperCase() + " does not exist");
+            errorResponse.setErrorMessage("User " + member_id.toUpperCase() + " does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
-        List<Totals> totalLoans  = loansRepository.getTotalLoans(member_no.toUpperCase());
+        List<Totals> totalLoans  = loansRepository.getTotalLoans(member_id.toUpperCase());
         return ResponseEntity.status(HttpStatus.OK).body(totalLoans);
     }
 
     @Override
     public ResponseEntity<?> postLoan(LoanPOJO loanPOJO) throws Exception {
-        List<Members> members  = membersRepository.fetchUserInfo(loanPOJO.getMember_no().toUpperCase());
+        List<Members> members  = membersRepository.fetchUserInfo(loanPOJO.getMember_id().toUpperCase());
         if(members.isEmpty()) {
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setErrorCode(404);
-            errorResponse.setErrorMessage("User " + loanPOJO.getMember_no().toUpperCase() + " does not exist");
+            errorResponse.setErrorMessage("User " + loanPOJO.getMember_id().toUpperCase() + " does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
-        int loan_balance = loansRepository.getTotal(loanPOJO.getMember_no().toUpperCase());
-        int total_shares = contributionsRepository.getSumShares(loanPOJO.getMember_no().toUpperCase());
-        if ((total_shares * 2) < (loan_balance + loanPOJO.getLoan_amount())) {
+        BigDecimal loan_balance = loansRepository.getTotal(loanPOJO.getMember_id().toUpperCase());
+        BigDecimal total_shares = contributionsRepository.getSumShares(loanPOJO.getMember_id().toUpperCase());
+        if (total_shares.multiply(BigDecimal.valueOf(2))
+                .compareTo(loan_balance.add(loanPOJO.getLoan_amount())) < 0) {
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setErrorCode(417);
-            errorResponse.setErrorMessage("User " + loanPOJO.getMember_no().toUpperCase() + " has exceeded their loan limit");
+            errorResponse.setErrorMessage("User " + loanPOJO.getMember_id().toUpperCase() + " has exceeded their loan limit");
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(errorResponse);
         }
         else {
+            Loans loan = new Loans();
+            loan.setMember_id(loanPOJO.getMember_id().toUpperCase());
+            loan.setAmount(loanPOJO.getLoan_amount());
 
+            BigDecimal interestRate = new BigDecimal(Objects.requireNonNull(env.getProperty("loans.default.interest"))); // e.g., 10 for 10%
+
+            // Calculate loan balance: Loan Amount + (Loan Amount * Interest Rate / 100)
+            BigDecimal interestAmount = loanPOJO.getLoan_amount().multiply(interestRate).divide(BigDecimal.valueOf(100));
+            loan.setLoan_balance(loanPOJO.getLoan_amount().add(interestAmount));
+
+            loan.setLoan_status(env.getProperty("loans.default.status"));
+            loan.setModified_at(LocalDateTime.now());
+            loan.setCreated_at(LocalDateTime.now());
+            loan.setInterest_rate(interestRate.intValue());
+            loan.setDue_date(loanPOJO.getRepayment_date());
+
+            loansRepository.save(loan);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(loan);
         }
-        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> getUnpaidLoans() throws Exception {
+        List<Loans> loans  = loansRepository.fetchUnpaidLoans();
+        return new ResponseEntity<>(loans, HttpStatus.OK);
     }
 }
