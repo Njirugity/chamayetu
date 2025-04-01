@@ -1,35 +1,39 @@
 package com.chamayetu.chamayetu.model;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "loans")
 public class Loans {
-    private Date created_at ;
-    private Date modified_at ;
+    private LocalDateTime created_at ;
+    private LocalDateTime modified_at ;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer loan_id ;
     private String member_id;
     private Date due_date ;
-    private Integer amount ;
+    private BigDecimal amount ;
     private String loan_status ;
-    private Integer loan_balance ;
+    private BigDecimal loan_balance ;
     private Integer interest_rate;
 
-    public Date getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public Date getModified_at() {
+    public LocalDateTime getModified_at() {
         return modified_at;
     }
 
-    public void setModified_at(Date modified_at) {
+    public void setModified_at(LocalDateTime modified_at) {
         this.modified_at = modified_at;
     }
 
@@ -57,11 +61,11 @@ public class Loans {
         this.due_date = due_date;
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -73,11 +77,11 @@ public class Loans {
         this.loan_status = loan_status;
     }
 
-    public Integer getLoan_balance() {
+    public BigDecimal getLoan_balance() {
         return loan_balance;
     }
 
-    public void setLoan_balance(Integer loan_balance) {
+    public void setLoan_balance(BigDecimal loan_balance) {
         this.loan_balance = loan_balance;
     }
 

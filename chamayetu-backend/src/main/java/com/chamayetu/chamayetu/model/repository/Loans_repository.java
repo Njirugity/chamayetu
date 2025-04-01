@@ -6,16 +6,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface Loans_repository extends CrudRepository <Loans, Long> {
-    @Query(nativeQuery = true, value = "SELECT * FROM LOANS WHERE MEMBER_NO = :member_no" +
-            " AND PAYMENT_INDICATOR IN ('unpaid', 'partial')")
-    public List<Loans> fetchUserLoans(@Param("member_no") String member_no);
+    @Query(nativeQuery = true, value = "SELECT * FROM LOANS WHERE member_id = :member_id" +
+            " AND loan_status IN ('Unpaid', 'Partially Paid')")
+    public List<Loans> fetchUserLoans(@Param("member_id") String member_id);
     @Query(nativeQuery = true, value = "SELECT sum(loan_balance) as total FROM LOANS " +
-            "WHERE MEMBER_NO = :member_no AND PAYMENT_INDICATOR IN ('unpaid', 'partial')")
-    public List<Totals> getTotalLoans(@Param("member_no") String member_no);
+            "WHERE member_id = :member_id AND loan_status IN ('Unpaid', 'Partially Paid')")
+    public List<Totals> getTotalLoans(@Param("member_id") String member_id);
     @Query(nativeQuery = true, value = "SELECT sum(loan_balance) as total FROM LOANS " +
-            "WHERE MEMBER_NO = :member_no AND PAYMENT_INDICATOR IN ('unpaid', 'partial')")
-    public int getTotal(@Param("member_no") String member_no);
+            "WHERE member_id = :member_id AND loan_status IN ('Unpaid', 'Partially Paid')")
+    public BigDecimal getTotal(@Param("member_id") String member_id);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM LOANS WHERE loan_status IN ('Unpaid', 'Partially Paid')")
+    public List<Loans> fetchUnpaidLoans();
 }

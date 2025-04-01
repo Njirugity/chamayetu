@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface Contributions_repository extends CrudRepository <Contributions, Long> {
@@ -16,5 +17,5 @@ public interface Contributions_repository extends CrudRepository <Contributions,
     public Totals getTotalShares(@Param("member_id") String member_id);
     @Query(nativeQuery = true, value = "SELECT total_contributions as total FROM contributions \" +\n" +
             "            \"WHERE MEMBER_id =:member_id order by contribution_id desc limit 1")
-    public int getSumShares(@Param("member_id") String member_id);
+    public BigDecimal getSumShares(@Param("member_id") String member_id);
 }
