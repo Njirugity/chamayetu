@@ -56,9 +56,9 @@ const Sidebar = () => {
       </div>
 
       {/* Menu Settings */}
-      <div className="settings">
+      {/* <div className="settings">
         <button className="settings-btn">Menu settings</button>
-      </div>
+      </div> */}
     </div>
   );
 };
