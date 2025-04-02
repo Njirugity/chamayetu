@@ -83,6 +83,7 @@ export const LoanForm: React.FC = () => {
           name="member_id"
           value={formData.member_id}
           onChange={handleChange}
+          required
         />
 
         <label htmlFor="loan_amount">Loan Amount</label>
@@ -92,6 +93,7 @@ export const LoanForm: React.FC = () => {
           name="loan_amount"
           value={formData.loan_amount === 0 ? "" : formData.loan_amount}
           onChange={handleChange}
+          required
         />
 
         <label htmlFor="repayment_date">Repayment Date</label>
@@ -100,6 +102,7 @@ export const LoanForm: React.FC = () => {
           name="repayment_date"
           value={formData.repayment_date.toISOString().split("T")[0]} // Convert date to string format
           onChange={handleChange}
+          required
         />
 
         <button type="submit">Submit</button>

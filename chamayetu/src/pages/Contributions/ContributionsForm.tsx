@@ -75,6 +75,7 @@ export const ContributionForm: React.FC = () => {
           name="member_id"
           value={formData.member_id}
           onChange={handleChange}
+          required
         />
 
         <label htmlFor="contact">Amount</label>
@@ -84,6 +85,7 @@ export const ContributionForm: React.FC = () => {
           name="amount"
           value={formData.amount}
           onChange={handleChange}
+          required
         />
 
         <button type="submit">Submit</button>
