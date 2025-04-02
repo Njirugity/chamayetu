@@ -1,15 +1,16 @@
 package com.chamayetu.chamayetu.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
 @Table(name = "loan_repayments")
 public class LoansRepayment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "repayment_id")
     private Integer repayment_id;
     @Column(name = "amount")
@@ -19,7 +20,7 @@ public class LoansRepayment {
     @Column(name = "modified_at")
     private LocalDateTime modified_at;
     @Column(name = "loan_id")
-    private Integer loan_id;
+    private Long loan_id;
     @Column(name = "member_id")
     private String member_id;
 
@@ -55,11 +56,11 @@ public class LoansRepayment {
         this.modified_at = modified_at;
     }
 
-    public Integer getLoan_id() {
+    public Long getLoan_id() {
         return loan_id;
     }
 
-    public void setLoan_id(Integer loan_id) {
+    public void setLoan_id(Long loan_id) {
         this.loan_id = loan_id;
     }
 

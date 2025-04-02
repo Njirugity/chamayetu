@@ -5,26 +5,28 @@ import com.chamayetu.chamayetu.pojo.LoanPOJO;
 import com.chamayetu.chamayetu.pojo.MemberRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/rest/loans/")
 public class LoansController {
     @Autowired
     LoansService loansService;
-    @RequestMapping( path = "getLoans/", method = RequestMethod.POST)
-    public ResponseEntity<?> loansInfo(@RequestBody MemberRequest memberRequest) throws Exception {
-        return loansService.getLoans(memberRequest.getMember_no());
+    @GetMapping("getLoans/{member_id}")
+    public ResponseEntity<?> loansInfo(@PathVariable String member_id) throws Exception {
+        return loansService.getLoans(member_id);
     }
-    @RequestMapping( path = "getTotalLoans/", method = RequestMethod.POST)
-    public ResponseEntity<?> totalLoans(@RequestBody MemberRequest memberRequest) throws Exception {
-        return loansService.getTotalLoans(memberRequest.getMember_no());
+    @GetMapping("getTotalLoans/{member_id}")
+    public ResponseEntity<?> totalLoans(@PathVariable String member_id) throws Exception {
+        return loansService.getTotalLoans(member_id);
     }
-    @RequestMapping( path = "postLoan/", method = RequestMethod.POST)
+    @PostMapping( "postLoan")
     public ResponseEntity<?> postLoan(@RequestBody LoanPOJO loanPOJO) throws Exception {
         return loansService.postLoan(loanPOJO);
+    }
+
+    @GetMapping("getUnpaidLoans")
+    public ResponseEntity<?> unpaidLoans() throws Exception {
+        return loansService.getUnpaidLoans();
     }
 }
