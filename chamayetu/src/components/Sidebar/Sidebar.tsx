@@ -3,6 +3,7 @@ import { FaChevronDown, FaChevronRight, FaCog, FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
+//Load a fixed side bar that will appear on all pages
 const Sidebar = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(true);

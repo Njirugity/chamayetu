@@ -45,8 +45,9 @@
 .chartContainer {
   margin: auto;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   transition: 0.3s ease-in-out;
+  
 }
 .chartCard {
   display: flex;

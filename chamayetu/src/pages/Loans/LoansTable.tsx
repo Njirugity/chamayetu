@@ -10,7 +10,9 @@ function LoansTable() {
   useEffect(() => {
     const fetchLoans = async () => {
       try {
-        const response = await fetch("http://localhost:8080/rest/loans/getUnpaidLoans");
+        const response = await fetch(
+          "http://localhost:8080/rest/loans/getUnpaidLoans"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch loans");
         }
@@ -43,7 +45,9 @@ function LoansTable() {
           {loans.map((loan) => (
             <tr key={loan.loan_id}>
               <td className="tableItem">{loan.member_id}</td>
-              <td className="tableItem">{new Date(loan.due_date).toLocaleDateString()}</td>
+              <td className="tableItem">
+                {new Date(loan.due_date).toLocaleDateString()}
+              </td>
               <td className="tableItem">{loan.amount.toFixed(2)}</td>
               <td className="tableItem">{loan.interest_rate}%</td>
               <td className="tableItem">{loan.loan_status}</td>

@@ -1,18 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import memberRegistrion from "./images/memberRegistration.png";
-import "./landing.css";
+import contribution from "./images/contributions.png";
+import loans from "./images/loans.png";
 
+import "./landing.css";
+//load the landing page
 function LandingPage() {
   const navigate = useNavigate();
   const login = useNavigate();
   const signup = useNavigate();
-
+  //handle navigation for try demo button
   const handleDemo = () => {
     navigate("/home");
   };
+  //handle navigation for login button
   const handleLogin = () => {
     login("/login");
   };
+  //handle navigation for sign up button
   const handleSignup = () => {
     signup("/signup");
   };
@@ -68,6 +73,11 @@ function LandingPage() {
               complete transparency.
             </p>
           </div>
+          <img
+            className="back-img"
+            src={contribution}
+            alt="Contributions"
+          ></img>
         </div>
         <div className="loans">
           <div className="explanations">
@@ -77,7 +87,7 @@ function LandingPage() {
               repayment progress.
             </p>
           </div>
-          <div className="placeholder"></div>
+          <img className="back-img" src={loans} alt="Loans"></img>
         </div>
       </div>
     </>

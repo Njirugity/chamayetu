@@ -2,13 +2,15 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import "./Home.css";
 
 const data = [
-  { name: "Cleared Loans", value: 120000 },
-  { name: "Active loans", value: 247330 },
-  { name: "Defaulted loans", value: 60500 },
+  { name: "Fully paid", value: 21, percentage: "21%" },
+  { name: "Partialy paid", value: 37, percentage: "37%" },
+  { name: "Not paid", value: 32, percentage: "32%" },
+  { name: "Emergency Loan", value: 10, percentage: "10%" },
 ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
+//pie chart to display the repayment rate
 const Repaymentchart = () => {
   return (
     <div>

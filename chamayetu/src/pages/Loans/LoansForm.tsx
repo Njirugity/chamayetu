@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Loan } from "../../models/Loans";
 import Popup from "../../components/PopUp/PopUp";
 
+
+//load the form to add a new loan and fetch loan information
 export const LoanForm: React.FC = () => {
   const [popupMessage, setPopupMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState<Loan>({
@@ -105,6 +107,7 @@ export const LoanForm: React.FC = () => {
         <button type="submit">Submit</button>
       </form>
 
+      {/* Popup Message */}
       {popupMessage && (
         <Popup message={popupMessage} onClose={() => setPopupMessage(null)} />
       )}
@@ -116,6 +119,7 @@ type SidePageProps = {
   onClose: () => void;
 };
 
+//load the form on a side page inside the contribution page
 const SidePage: React.FC<SidePageProps> = ({ onClose }) => {
   return (
     <div className="side-page">

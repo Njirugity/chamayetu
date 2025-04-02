@@ -1,6 +1,7 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../pages/Home/Home.css";
 
+//Loads the title of the group on all pages
 function Header() {
   return (
     <>

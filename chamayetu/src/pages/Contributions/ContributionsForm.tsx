@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Contribution } from "../../models/Contribution";
 import Popup from "../../components/PopUp/PopUp";
 
+
+// load a form to add a contribution
 export const ContributionForm: React.FC = () => {
   const [popupMessage, setPopupMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState<Contribution>({
@@ -89,6 +91,7 @@ export const ContributionForm: React.FC = () => {
         <button type="submit">Submit</button>
       </form>
 
+      {/* Popup Message */}
       {popupMessage && (
         <Popup message={popupMessage} onClose={() => setPopupMessage(null)} />
       )}
@@ -99,6 +102,7 @@ type SidePageProps = {
   onClose: () => void;
 };
 
+//load the form on a side page inside the contribution page
 const SidePage: React.FC<SidePageProps> = ({ onClose }) => {
   return (
     <div className="side-page">

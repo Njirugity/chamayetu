@@ -3,7 +3,7 @@ import SearchBar from "../../components/Searchbar";
 import "./Members.css";
 import { MemberInfo } from "../../models/Member";
 
-
+//Loads the member table that will display member information
 const MemberDetails: React.FC = () => {
   const [members, setMembers] = useState<MemberInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -12,7 +12,9 @@ const MemberDetails: React.FC = () => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await fetch("http://localhost:8080/rest/members/getMembers");
+        const response = await fetch(
+          "http://localhost:8080/rest/members/getMembers"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch members");
         }
@@ -55,7 +57,9 @@ const MemberDetails: React.FC = () => {
                     <td className="tableItem">{member.last_name}</td>
                     <td className="tableItem">{member.phone_number}</td>
                     <td className="tableItem">{member.email}</td>
-                    <td className="tableItem">{member.is_active ? "Yes" : "No"}</td>
+                    <td className="tableItem">
+                      {member.is_active ? "Yes" : "No"}
+                    </td>
                   </tr>
                 ))}
               </tbody>

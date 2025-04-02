@@ -9,6 +9,7 @@ const data = [
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
+//loads a pie chart that displays the total loans and their status
 const LoansChart = () => {
   return (
     <div>

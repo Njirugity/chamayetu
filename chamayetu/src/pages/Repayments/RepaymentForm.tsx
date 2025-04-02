@@ -93,6 +93,7 @@ export const RepaymentForm: React.FC = () => {
         <button type="submit">Submit</button>
       </form>
 
+      {/* Popup Message */}
       {popupMessage && (
         <Popup message={popupMessage} onClose={() => setPopupMessage(null)} />
       )}
@@ -103,6 +104,7 @@ type SidePageProps = {
   onClose: () => void;
 };
 
+//load the form on a side page inside the contribution page
 const SidePage: React.FC<SidePageProps> = ({ onClose }) => {
   return (
     <div className="side-page">

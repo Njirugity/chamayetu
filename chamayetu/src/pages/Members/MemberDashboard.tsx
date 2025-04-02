@@ -2,6 +2,7 @@ import "./Members.css";
 import SidePage from "./MemberForm";
 import { useState } from "react";
 
+//Load the members dashboard
 function Dashboard() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (

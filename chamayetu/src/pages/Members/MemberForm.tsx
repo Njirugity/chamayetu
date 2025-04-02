@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Member } from "../../models/Member";
 import Popup from "../../components/PopUp/PopUp";
 
+
+//Load form to register new members
 const MemberForm: React.FC = () => {
   const [members, setMembers] = useState<Member[]>([]);
   const [formData, setFormData] = useState<Member>({
@@ -184,6 +186,7 @@ type SidePageProps = {
   onClose: () => void;
 };
 
+//load the form on a side page inside the contribution page
 const SidePage: React.FC<SidePageProps> = ({ onClose }) => {
   return (
     <div className="side-page">

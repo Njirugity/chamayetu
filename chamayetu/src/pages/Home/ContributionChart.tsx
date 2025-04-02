@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import "./Home.css";
 
+
 const data = [
   { month: "Jan", contribution: 42200 },
   { month: "Feb", contribution: 21100 },
@@ -25,6 +26,7 @@ const data = [
   { month: "Dec", contribution: 0 },
 ];
 
+//load a column chart to display monthly contributions
 const ColumnChart = () => {
   return (
     <div>

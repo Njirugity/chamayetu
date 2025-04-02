@@ -6,6 +6,8 @@ import { Loan } from "../../models/Loans";
 import SidePage from "./LoansForm";
 import { useState } from "react";
 
+
+//Load the loans page dashboard
 function Payment() {
   const [loans, setLoans] = useState<Loan[]>([]);
   const [showForm, setForm] = useState(false);

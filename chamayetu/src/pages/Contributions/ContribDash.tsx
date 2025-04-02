@@ -3,6 +3,8 @@ import "./Contributions.css";
 import SidePage from "./ContributionsForm";
 import { ContributionDashboard } from "../../models/Contribution";
 
+
+//The contribution dashboard. It contains the table and button to load the form
 function ContribDash() {
   const [contributions, setContributions] = useState<ContributionDashboard[]>(
     []
