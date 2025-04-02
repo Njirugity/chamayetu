@@ -1,5 +1,5 @@
 import "./Payment.css";
-import PaymentTable from "./LoansTable";
+import LoansTable from "./LoansTable";
 import Navbar from "./Navbar";
 import Header from "../../components/Header";
 import { Loan } from "../../models/Loans";
@@ -32,7 +32,7 @@ function Payment() {
           {/* <input>From</input>
       <input>To</input>
       <input>Search</input> */}
-          <PaymentTable></PaymentTable>
+          <LoansTable></LoansTable>
         </div>
       </div>
     </>

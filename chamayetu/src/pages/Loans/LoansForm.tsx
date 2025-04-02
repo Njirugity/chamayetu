@@ -6,64 +6,76 @@ import Popup from "../../components/PopUp/PopUp";
 export const LoanForm: React.FC = () => {
   const [popupMessage, setPopupMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState<Loan>({
-    due_date: "",
-    first_name: "",
-    last_name: "",
+    repayment_date: new Date(),
     member_id: "",
-    amount: 0,
+    loan_amount: 0,
   });
 
+  // Handle input changes
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: name === "amount" ? Number(value) : value, // Convert amount to number
-    });
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]:
+        name === "loan_amount"
+          ? value
+            ? Number(value)
+            : ""
+          : name === "repayment_date"
+          ? new Date(value)
+          : value,
+    }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (
-      !formData.due_date ||
-      !formData.first_name ||
-      !formData.last_name ||
-      !formData.member_id ||
-      !formData.amount
-    ) {
+  
+    if (!formData.member_id || !formData.loan_amount || !formData.repayment_date) {
       setPopupMessage("All fields are required!");
       return;
     }
-    // Send data to parent component
-    setPopupMessage(null);
-    setFormData({
-      due_date: "",
-      first_name: "",
-      last_name: "",
-      member_id: "",
-      amount: 0,
-    });
+  
+    try {
+      const response = await fetch("http://localhost:8080/rest/loans/postLoan", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          repayment_date: formData.repayment_date.toISOString().split("T")[0], // Convert Date to string
+        }),
+      });
+  
+      const responseData = await response.json(); // Parse response JSON
+  
+      if (!response.ok) {
+        // If API returns an error message, show it in popup
+        setPopupMessage(responseData.errorMessage || "Failed to submit loan");
+        return;
+      }
+  
+      setPopupMessage("Loan submitted successfully!");
+  
+      // Reset form
+      setFormData({
+        repayment_date: new Date(),
+        member_id: "",
+        loan_amount: 0,
+      });
+  
+    } catch (error) {
+      setPopupMessage("Error submitting loan. Please try again.");
+      console.error("Submission error:", error);
+    }
   };
+  
+
   return (
     <div className="formContainer">
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="first_name">First Name</label>
-        <input
-          type="text"
-          placeholder="Enter First Name"
-          name="first_name"
-          value={formData.first_name}
-          onChange={handleChange}
-        />
-        <label htmlFor="lastname">Last Name</label>
-        <input
-          type="text"
-          placeholder="Enter Last Name"
-          name="last_name"
-          value={formData.last_name}
-          onChange={handleChange}
-        />
-
         <label htmlFor="memberId">Member ID</label>
         <input
           type="text"
@@ -73,20 +85,20 @@ export const LoanForm: React.FC = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="contact">Amount</label>
+        <label htmlFor="loan_amount">Loan Amount</label>
         <input
-          type="text"
-          placeholder="Enter Phone Number"
-          name="amount"
-          value={formData.amount}
+          type="number"
+          placeholder="Enter Loan Amount"
+          name="loan_amount"
+          value={formData.loan_amount === 0 ? "" : formData.loan_amount}
           onChange={handleChange}
         />
-        <label htmlFor="date">Date</label>
+
+        <label htmlFor="repayment_date">Repayment Date</label>
         <input
-          type="text"
-          placeholder="Enter Loan Due date"
-          name="date"
-          value={formData.due_date}
+          type="date"
+          name="repayment_date"
+          value={formData.repayment_date.toISOString().split("T")[0]} // Convert date to string format
           onChange={handleChange}
         />
 
@@ -99,6 +111,7 @@ export const LoanForm: React.FC = () => {
     </div>
   );
 };
+
 type SidePageProps = {
   onClose: () => void;
 };
