@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LoanRepaymentServiceImpl implements LoanRepaymentService {
@@ -41,22 +42,22 @@ public class LoanRepaymentServiceImpl implements LoanRepaymentService {
     @Transactional
     public ResponseEntity<?> postLoanRepayment(RepaymentPojo repaymentPojo) throws Exception {
         //Check if member exists
-        Members member = membersRepository.fetchUserInfo(repaymentPojo.getMember_id()).get(0);
-        if(member == null){
+        List<Members> members = membersRepository.fetchUserInfo(repaymentPojo.getMember_id());
+        if(members.isEmpty()){
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setErrorCode(404);
             errorResponse.setErrorMessage("User " + repaymentPojo.getMember_id() + " does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
         //Check if loan exists
-        Loans loan = loansRepository.findById(repaymentPojo.getLoan_id()).get();
-        if(loan == null){
+        Optional<Loans> loans = loansRepository.findById(repaymentPojo.getLoan_id());
+        if(loans.isEmpty()){
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setErrorCode(404);
             errorResponse.setErrorMessage("Loan ID " + repaymentPojo.getLoan_id() + " does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
-
+        Loans loan = loans.get();
         if (loan.getLoan_status().equals(env.getProperty("loans.paid.status"))){
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setErrorCode(400);

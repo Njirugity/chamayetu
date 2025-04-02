@@ -2,14 +2,12 @@ import "./Payment.css";
 import LoansTable from "./LoansTable";
 import Navbar from "./Navbar";
 import Header from "../../components/Header";
-import { Loan } from "../../models/Loans";
 import SidePage from "./LoansForm";
 import { useState } from "react";
 
 
 //Load the loans page dashboard
 function Payment() {
-  const [loans, setLoans] = useState<Loan[]>([]);
   const [showForm, setForm] = useState(false);
   return (
     <>
@@ -30,10 +28,6 @@ function Payment() {
             {" "}
             Filter Dates <i className="bi bi-chevron-down"></i>
           </button>
-
-          {/* <input>From</input>
-      <input>To</input>
-      <input>Search</input> */}
           <LoansTable></LoansTable>
         </div>
       </div>

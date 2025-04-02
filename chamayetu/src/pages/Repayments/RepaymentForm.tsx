@@ -7,28 +7,29 @@ export const RepaymentForm: React.FC = () => {
   const [popupMessage, setPopupMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState<Repayment>({
     member_id: "",
+    loan_id: 0,
     amount: 0,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: name === "amount" ? Number(value) : value, // Convert amount to number
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === "amount" || name === "loan_id" ? (value ? Number(value) : "") : value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.member_id || !formData.amount) {
+    if (!formData.member_id || !formData.loan_id || !formData.amount) {
       setPopupMessage("All fields are required!");
       return;
     }
 
     try {
       const response = await fetch(
-        "http://localhost:8080/rest/Repayments/postRepayment",
+        "http://localhost:8080/rest/loanrepayment/postLoanRepayment",
         {
           method: "POST",
           headers: {
@@ -38,17 +39,19 @@ export const RepaymentForm: React.FC = () => {
         }
       );
 
-      const data = await response.json(); // Parse JSON response
+      const data = await response.json(); // Parse response
 
       if (!response.ok) {
-        throw new Error(data.errorMessage || "Failed to submit Repayment.");
+        // Show the error message returned by the API
+        throw new Error(data.errorMessage || "Failed to submit repayment.");
       }
 
       setPopupMessage("Repayment submitted successfully!");
 
-      // Reset the form after successful submission
+      // Reset form after successful submission
       setFormData({
         member_id: "",
+        loan_id: 0,
         amount: 0,
       });
     } catch (error: unknown) {
@@ -79,15 +82,27 @@ export const RepaymentForm: React.FC = () => {
           name="member_id"
           value={formData.member_id}
           onChange={handleChange}
+          required
         />
 
-        <label htmlFor="contact">Amount</label>
+        <label htmlFor="loan_id">Loan Id</label>
         <input
-          type="text"
-          placeholder="Enter Phone Number"
-          name="amount"
-          value={formData.amount}
+          type="number"
+          placeholder="Enter Loan ID"
+          name="loan_id"
+          value={formData.loan_id || ""}
           onChange={handleChange}
+          required
+        />
+
+        <label htmlFor="amount">Amount</label>
+        <input
+          type="number"
+          placeholder="Enter Amount"
+          name="amount"
+          value={formData.amount || ""}
+          onChange={handleChange}
+          required
         />
 
         <button type="submit">Submit</button>
@@ -100,6 +115,7 @@ export const RepaymentForm: React.FC = () => {
     </div>
   );
 };
+
 type SidePageProps = {
   onClose: () => void;
 };
