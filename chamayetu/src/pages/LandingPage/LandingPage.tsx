@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import memberRegistrion from "./images/memberRegistration.png";
 import contribution from "./images/contributions.png";
 import loans from "./images/loans.png";
+import bgImage from "./images/backgroundlogo.jpeg";
 
 import "./landing.css";
 //load the landing page
@@ -42,6 +43,11 @@ function LandingPage() {
               </button>
               <button className="contact">Contact us</button>
             </div>
+            {/* <img
+              className="backgroundImage"
+              src={bgImage}
+              alt="backround logo"
+            /> */}
             <p className="defination">
               Managing group investments can be challenging, with multiple
               contributors, shared funds, and loan tracking. Our Group
