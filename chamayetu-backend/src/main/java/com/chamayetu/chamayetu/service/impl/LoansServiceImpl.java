@@ -7,6 +7,7 @@ import com.chamayetu.chamayetu.model.repository.Members_repository;
 import com.chamayetu.chamayetu.model.repository.Contributions_repository;
 import com.chamayetu.chamayetu.pojo.ErrorResponse;
 import com.chamayetu.chamayetu.pojo.LoanPOJO;
+import com.chamayetu.chamayetu.pojo.LoansResponse;
 import com.chamayetu.chamayetu.pojo.Totals;
 import com.chamayetu.chamayetu.service.LoansService;
 import com.chamayetu.chamayetu.util.annotation.Facade;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Facade
+@Service
 public class LoansServiceImpl implements LoansService {
     @Autowired
     private Loans_repository loansRepository ;
@@ -102,7 +104,7 @@ public class LoansServiceImpl implements LoansService {
 
     @Override
     public ResponseEntity<?> getUnpaidLoans() throws Exception {
-        List<Loans> loans  = loansRepository.fetchUnpaidLoans();
+        List<LoansResponse> loans  = loansRepository.fetchUnpaidLoans();
         return new ResponseEntity<>(loans, HttpStatus.OK);
     }
 }

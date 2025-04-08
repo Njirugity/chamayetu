@@ -4,6 +4,7 @@ import com.chamayetu.chamayetu.model.Contributions;
 import com.chamayetu.chamayetu.model.Members;
 import com.chamayetu.chamayetu.model.repository.Members_repository;
 import com.chamayetu.chamayetu.model.repository.Contributions_repository;
+import com.chamayetu.chamayetu.pojo.ContributionsResponse;
 import com.chamayetu.chamayetu.pojo.ErrorResponse;
 import com.chamayetu.chamayetu.pojo.ContributionsPOJO;
 import com.chamayetu.chamayetu.pojo.Totals;
@@ -12,12 +13,13 @@ import com.chamayetu.chamayetu.util.annotation.Facade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Facade
+@Service
 public class ContributionsServiceImpl implements ContributionsService {
     @Autowired
     private Contributions_repository contributionsRepository ;
@@ -77,7 +79,7 @@ public class ContributionsServiceImpl implements ContributionsService {
 
     @Override
     public ResponseEntity<?> getAllContributions() throws Exception {
-        List<Contributions> contributions = (List<Contributions>) contributionsRepository.findAll();
+        List<ContributionsResponse> contributions = contributionsRepository.getAllContributions();
         return ResponseEntity.status(HttpStatus.OK).body(contributions);
     }
 

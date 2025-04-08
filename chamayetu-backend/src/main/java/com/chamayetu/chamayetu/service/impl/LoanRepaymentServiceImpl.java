@@ -7,6 +7,7 @@ import com.chamayetu.chamayetu.model.repository.LoansRepayment_repository;
 import com.chamayetu.chamayetu.model.repository.Loans_repository;
 import com.chamayetu.chamayetu.model.repository.Members_repository;
 import com.chamayetu.chamayetu.pojo.ErrorResponse;
+import com.chamayetu.chamayetu.pojo.LoanRepaymentsResponse;
 import com.chamayetu.chamayetu.pojo.RepaymentPojo;
 import com.chamayetu.chamayetu.service.LoanRepaymentService;
 import jakarta.transaction.Transactional;
@@ -34,7 +35,7 @@ public class LoanRepaymentServiceImpl implements LoanRepaymentService {
 
     @Override
     public ResponseEntity<?> getLoanRepayments() throws Exception {
-        List <LoansRepayment> loanRepayments = (List<LoansRepayment>) loanRepaymentRepository.findAll();
+        List <LoanRepaymentsResponse> loanRepayments = loanRepaymentRepository.fetchLoanRepayments();
         return ResponseEntity.status(HttpStatus.OK).body(loanRepayments);
     }
 

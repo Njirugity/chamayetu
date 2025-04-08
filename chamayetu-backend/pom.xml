@@ -24,10 +24,6 @@
 			<id>mvn-central</id>
 			<url>https://mvnrepository.com/repos/central</url>
 		</repository>
-		<repository>
-			<id>mvn-central</id>
-			<url>https://mvnrepository.com/repos/central</url>
-		</repository>
 	</repositories>
 
 	<distributionManagement>
@@ -84,6 +80,7 @@
 
 
 	<build>
+		<finalName>chamayetu</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
