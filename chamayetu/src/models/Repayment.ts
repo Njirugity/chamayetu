@@ -5,10 +5,11 @@ export type Repayment = {
 };
 
 export interface LoanRepayment {
-  repayment_id: number;
+  repaymentId: number;
   amount: number;
-  created_at: string;
-  modified_at: string;
-  loan_id: number;
-  member_id: string;
+  createdAt: string;
+  modifiedAt: string;
+  loanId: number;
+  memberId: string;
+  fullName: string;
 }

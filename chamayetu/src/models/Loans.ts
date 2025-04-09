@@ -5,14 +5,15 @@ export type Loan = {
 };
 
 export type LoanDashboard = {
-  created_at: string;      
-  modified_at: string;      
-  loan_id: number;          
-  member_id: string;        
-  due_date: string;         
+  createdAt: string;      
+  modifiedAt: string;      
+  loanId: number;          
+  memberId: string;        
+  dueDate: string;         
   amount: number;           
-  loan_status: string;     
-  loan_balance: number;     
-  interest_rate: number; 
+  loanStatus: string;     
+  loanBalance: number;     
+  interestRate: number; 
+  fullName: string;
 }
 
