@@ -54,10 +54,11 @@ function RepaymentTable() {
               <tr className="tableHead">
                 {/* <th className="tableItem">Repayment ID</th> */}
                 <th className="tableItem">Member ID</th>
+                <th className="tableItem">Member Name</th>
                 <th className="tableItem">Loan ID</th>
-                <th className="tableItem">Amount</th>
-                <th className="tableItem">Created At</th>
-                <th className="tableItem">Modified At</th>
+                <th className="tableItem">Repaid Amount</th>
+                <th className="tableItem">Repayment Date</th>
+                <th className="tableItem">Modification Date</th>
               </tr>
             </thead>
             <tbody>
@@ -65,11 +66,12 @@ function RepaymentTable() {
                 repayments.map((repayment, index) => (
                   <tr key={index}>
                     {/* <td className="tableItem">{repayment.repayment_id}</td> */}
-                    <td className="tableItem">{repayment.member_id}</td>
-                    <td className="tableItem">{repayment.loan_id}</td>
+                    <td className="tableItem">{repayment.memberId}</td>
+                    <td className="tableItem">{repayment.fullName}</td>
+                    <td className="tableItem">{repayment.loanId}</td>
                     <td className="tableItem">{repayment.amount}</td>
-                    <td className="tableItem">{formatDate(repayment.created_at)}</td>
-                    <td className="tableItem">{formatDate(repayment.modified_at)}</td>
+                    <td className="tableItem">{formatDate(repayment.createdAt)}</td>
+                    <td className="tableItem">{formatDate(repayment.modifiedAt)}</td>
                   </tr>
                 ))
               ) : (

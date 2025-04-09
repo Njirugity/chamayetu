@@ -34,6 +34,9 @@ function LoansTable() {
         <thead>
           <tr className="tableHead">
             <th className="tableItem">Member Id</th>
+            <th className="tableItem">Loan ID</th>
+            <th className="tableItem">Member Name</th>
+            <th className="tableItem">Loan Date</th>
             <th className="tableItem">Due Date</th>
             <th className="tableItem">Loan Amount</th>
             <th className="tableItem">Interest Rate</th>
@@ -43,15 +46,20 @@ function LoansTable() {
         </thead>
         <tbody>
           {loans.map((loan) => (
-            <tr key={loan.loan_id}>
-              <td className="tableItem">{loan.member_id}</td>
+            <tr key={loan.loanId}>
+              <td className="tableItem">{loan.memberId}</td>
+              <td className="tableItem">{loan.loanId}</td>
+              <td className="tableItem">{loan.fullName}</td>
               <td className="tableItem">
-                {new Date(loan.due_date).toLocaleDateString()}
+                {new Date(loan.createdAt).toLocaleDateString()}
+              </td>
+              <td className="tableItem">
+                {new Date(loan.dueDate).toLocaleDateString()}
               </td>
               <td className="tableItem">{loan.amount.toFixed(2)}</td>
-              <td className="tableItem">{loan.interest_rate}%</td>
-              <td className="tableItem">{loan.loan_status}</td>
-              <td className="tableItem">{loan.loan_balance.toFixed(2)}</td>
+              <td className="tableItem">{loan.interestRate}%</td>
+              <td className="tableItem">{loan.loanStatus}</td>
+              <td className="tableItem">{loan.loanBalance.toFixed(2)}</td>
             </tr>
           ))}
         </tbody>

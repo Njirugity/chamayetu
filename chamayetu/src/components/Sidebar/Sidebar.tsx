@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { FaChevronDown, FaChevronRight, FaCog, FaPlus } from "react-icons/fa";
+import {
+  FaChevronDown,
+  FaChevronRight,
+  FaPlus,
+} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import LogoutPopup from "../LogoutPopUp/LogoutPopup";
 import "./Sidebar.css";
 
-//Load a fixed side bar that will appear on all pages
 const Sidebar = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(true);
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
   const menuItems = [
     { name: "Home", path: "/home" },
@@ -15,52 +20,62 @@ const Sidebar = () => {
     { name: "Contributions", path: "/contributions" },
     { name: "Loan Repayments", path: "/repayments" },
     { name: "Settings", path: "/settings" },
-    { name: "Logout", path: "/logout" },
+    { name: "Logout", path: "" }, // no path needed
   ];
 
+  const handleLogout = () => {
+    console.log("Logging out...");
+    // Perform logout logic here, e.g., clearing tokens or user data
+    setShowLogoutPopup(false);
+    navigate("/login");
+  };
+
   return (
-    <div className="sidebar">
-      {/* Logo and New Button */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-bold">chamayetu</h2>
-        <button className="btn-new">
-          <FaPlus className="mr-2" /> New
-        </button>
-      </div>
-
-      {/* Menu Items */}
-      <div className="space-y-3">
-        <div
-          className="text-sm font-semibold flex items-center cursor-pointer"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          MENU{" "}
-          <FaChevronDown
-            className={`ml-2 text-xs transition-transform ${
-              menuOpen ? "rotate-180" : "rotate-0"
-            }`}
-          />
+    <>
+      <div className="sidebar">
+        {/* Logo and New Button */}
+        <div className="sidebar-header">
+          <h2 className="sidebar-title">chamayetu</h2>
+          <button className="btn-new">
+            <FaPlus className="btn-icon" /> New
+          </button>
         </div>
-        {menuOpen && (
-          <div className="menu">
-            {menuItems.map(({ name, path }, index) => (
-              <div
-                key={index}
-                onClick={() => navigate(path)}
-                className="menu-item"
-              >
-                <FaChevronRight className="mr-2 text-xs" /> {name}
-              </div>
-            ))}
+
+        {/* Menu Items */}
+        <div className="sidebar-menu">
+          <div
+            className="menu-label"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            MENU{" "}
+            <FaChevronDown
+              className={`menu-chevron ${menuOpen ? "rotate" : ""}`}
+            />
           </div>
-        )}
+          {menuOpen && (
+            <div className="menu">
+              {menuItems.map(({ name, path }, index) => (
+                <div
+                  key={index}
+                  onClick={() =>
+                    name === "Logout" ? setShowLogoutPopup(true) : navigate(path)
+                  }
+                  className="menu-item"
+                >
+                  <FaChevronRight className="menu-icon" /> {name}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Menu Settings */}
-      {/* <div className="settings">
-        <button className="settings-btn">Menu settings</button>
-      </div> */}
-    </div>
+      <LogoutPopup
+        visible={showLogoutPopup}
+        onConfirm={handleLogout}
+        onCancel={() => setShowLogoutPopup(false)}
+      />
+    </>
   );
 };
 

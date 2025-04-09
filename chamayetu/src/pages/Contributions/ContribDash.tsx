@@ -58,6 +58,7 @@ function ContribDash() {
               <tr className="tableHead">
                 <th className="tableItem">Contribution Date</th>
                 <th className="tableItem">Member ID</th>
+                <th className="tableItem">Full Name</th>
                 <th className="tableItem">Amount</th>
                 <th className="tableItem">Total Contributions</th>
               </tr>
@@ -67,11 +68,12 @@ function ContribDash() {
                 contributions.map((contrib, index) => (
                   <tr key={index}>
                     <td className="tableItem">
-                      {formatDate(contrib.created_at)}
+                      {formatDate(contrib.createdAt)}
                     </td>
-                    <td className="tableItem">{contrib.member_id}</td>
+                    <td className="tableItem">{contrib.memberId}</td>
+                    <td className="tableItem">{contrib.fullName}</td>
                     <td className="tableItem">{contrib.amount}</td>
-                    <td className="tableItem">{contrib.total_contributions}</td>
+                    <td className="tableItem">{contrib.totalContributions}</td>
                   </tr>
                 ))
               ) : (
