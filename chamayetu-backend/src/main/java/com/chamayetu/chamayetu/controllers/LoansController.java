@@ -29,4 +29,9 @@ public class LoansController {
     public ResponseEntity<?> unpaidLoans() throws Exception {
         return loansService.getUnpaidLoans();
     }
+
+    @GetMapping("loanAnalytics")
+    public ResponseEntity<?> loanAnalytics() throws Exception {
+        return loansService.loanAnalytics();
+    }
 }
