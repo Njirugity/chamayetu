@@ -8,4 +8,5 @@ public interface LoansService {
     ResponseEntity<?> getTotalLoans(String member_id) throws Exception ;
     ResponseEntity<?> postLoan(LoanPOJO loanPOJO) throws Exception ;
     ResponseEntity<?> getUnpaidLoans() throws Exception ;
+    ResponseEntity<?> loanAnalytics() throws Exception ;
 }

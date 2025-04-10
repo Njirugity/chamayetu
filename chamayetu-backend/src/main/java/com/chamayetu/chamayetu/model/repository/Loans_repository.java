@@ -2,6 +2,7 @@ package com.chamayetu.chamayetu.model.repository;
 
 import com.chamayetu.chamayetu.model.Loans;
 import com.chamayetu.chamayetu.pojo.LoansResponse;
+import com.chamayetu.chamayetu.pojo.LoansSummary;
 import com.chamayetu.chamayetu.pojo.Totals;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -29,5 +30,12 @@ public interface Loans_repository extends CrudRepository <Loans, Long> {
             "WHERE loan_status IN ('Unpaid', 'Partially Paid') " +
             "ORDER BY due_date ASC", nativeQuery = true)
     List<LoansResponse> fetchUnpaidLoans();
+
+    @Query(value = "SELECT " +
+            "SUM(CASE WHEN loan_status = 'Paid' THEN amount ELSE 0 END) AS clearedLoans, " +
+            "SUM(CASE WHEN loan_status IN ('Unpaid', 'Partially Paid') THEN amount ELSE 0 END) AS activeLoans, " +
+            "SUM(CASE WHEN loan_status = 'Defaulted' THEN amount ELSE 0 END) AS defaultedLoans " +
+            "FROM loans", nativeQuery = true)
+    LoansSummary getLoanSummary();
 
 }

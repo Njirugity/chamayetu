@@ -5,10 +5,7 @@ import com.chamayetu.chamayetu.model.Members;
 import com.chamayetu.chamayetu.model.repository.Loans_repository;
 import com.chamayetu.chamayetu.model.repository.Members_repository;
 import com.chamayetu.chamayetu.model.repository.Contributions_repository;
-import com.chamayetu.chamayetu.pojo.ErrorResponse;
-import com.chamayetu.chamayetu.pojo.LoanPOJO;
-import com.chamayetu.chamayetu.pojo.LoansResponse;
-import com.chamayetu.chamayetu.pojo.Totals;
+import com.chamayetu.chamayetu.pojo.*;
 import com.chamayetu.chamayetu.service.LoansService;
 import com.chamayetu.chamayetu.util.annotation.Facade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +103,11 @@ public class LoansServiceImpl implements LoansService {
     public ResponseEntity<?> getUnpaidLoans() throws Exception {
         List<LoansResponse> loans  = loansRepository.fetchUnpaidLoans();
         return new ResponseEntity<>(loans, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> loanAnalytics() throws Exception {
+        LoansSummary loansSummary = loansRepository.getLoanSummary();
+        return ResponseEntity.status(HttpStatus.OK).body(loansSummary);
     }
 }
