@@ -38,4 +38,22 @@ public interface Loans_repository extends CrudRepository <Loans, Long> {
             "FROM loans", nativeQuery = true)
     LoansSummary getLoanSummary();
 
+    @Query(value = "SELECT l.loan_id, l.member_id, l.amount, l.interest_rate, l.due_date, " +
+            "l.loan_status, l.loan_balance, l.created_at, l.modified_at, " +
+            "(first_name || ' ' || last_name) AS full_name " +
+            "FROM loans l " +
+            "LEFT JOIN members m ON m.member_id = l.member_id " +
+            "WHERE loan_status = 'Defaulted' " +
+            "ORDER BY due_date ASC", nativeQuery = true)
+    List<LoansResponse> fetchDefaultedLoans();
+
+    @Query(value = "SELECT l.loan_id, l.member_id, l.amount, l.interest_rate, l.due_date, " +
+            "l.loan_status, l.loan_balance, l.created_at, l.modified_at, " +
+            "(first_name || ' ' || last_name) AS full_name " +
+            "FROM loans l " +
+            "LEFT JOIN members m ON m.member_id = l.member_id " +
+            "WHERE loan_status = 'Paid' " +
+            "ORDER BY due_date ASC", nativeQuery = true)
+    List<LoansResponse> fetchClearedLoans();
+
 }

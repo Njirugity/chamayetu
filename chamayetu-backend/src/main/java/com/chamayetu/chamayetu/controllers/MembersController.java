@@ -37,4 +37,9 @@ public class MembersController {
     public ResponseEntity<?> logon(@RequestBody LogonPojo logonPOJO) throws Exception {
         return memberService.logon(logonPOJO);
     }
+
+    @GetMapping("getMembersAnalytics")
+    public ResponseEntity<?> getMembersAnalytics() throws Exception {
+        return memberService.getMembersAnalytics();
+    }
 }

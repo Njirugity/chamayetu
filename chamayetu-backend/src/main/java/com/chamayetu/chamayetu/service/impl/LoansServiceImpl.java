@@ -110,4 +110,16 @@ public class LoansServiceImpl implements LoansService {
         LoansSummary loansSummary = loansRepository.getLoanSummary();
         return ResponseEntity.status(HttpStatus.OK).body(loansSummary);
     }
+
+    @Override
+    public ResponseEntity<?> getDefaultedLoans() throws Exception {
+        List<LoansResponse> loans  = loansRepository.fetchDefaultedLoans();
+        return new ResponseEntity<>(loans, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> getClearedLoans() throws Exception {
+        List<LoansResponse> loans  = loansRepository.fetchClearedLoans();
+        return new ResponseEntity<>(loans, HttpStatus.OK);
+    }
 }

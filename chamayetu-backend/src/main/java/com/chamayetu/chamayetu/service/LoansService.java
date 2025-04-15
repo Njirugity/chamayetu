@@ -9,4 +9,6 @@ public interface LoansService {
     ResponseEntity<?> postLoan(LoanPOJO loanPOJO) throws Exception ;
     ResponseEntity<?> getUnpaidLoans() throws Exception ;
     ResponseEntity<?> loanAnalytics() throws Exception ;
+    ResponseEntity<?> getDefaultedLoans() throws Exception ;
+    ResponseEntity<?> getClearedLoans() throws Exception ;
 }

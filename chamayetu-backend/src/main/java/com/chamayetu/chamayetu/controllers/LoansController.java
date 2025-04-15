@@ -34,4 +34,14 @@ public class LoansController {
     public ResponseEntity<?> loanAnalytics() throws Exception {
         return loansService.loanAnalytics();
     }
+
+    @GetMapping("getDefaultedLoans")
+    public ResponseEntity<?> getDefaultedLoans() throws Exception {
+        return loansService.getDefaultedLoans();
+    }
+
+    @GetMapping("getClearedLoans")
+    public ResponseEntity<?> getClearedLoans() throws Exception {
+        return loansService.getClearedLoans();
+    }
 }
