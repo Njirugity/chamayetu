@@ -12,5 +12,6 @@ public interface MemberService {
     public boolean isCorrectPassword(String databasePassword, String userProvidedPassword) throws Exception;
     ResponseEntity<?> registerNewUser(UserProfile userProfile) throws Exception ;
     ResponseEntity<?> logon(LogonPojo logonPOJO) throws Exception ;
+    ResponseEntity<?> getMembersAnalytics() throws Exception ;
 
 }

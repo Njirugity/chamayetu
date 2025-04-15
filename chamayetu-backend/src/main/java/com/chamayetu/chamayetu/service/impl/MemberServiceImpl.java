@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Facade
+@Service
 public class MemberServiceImpl implements MemberService {
 
     @Autowired
@@ -122,6 +123,7 @@ public class MemberServiceImpl implements MemberService {
         Members member = new Members() ;
         member.setMember_id(userProfile.getMember_id());
         member.setModified_at(LocalDateTime.now());
+        member.setCreated_at(LocalDateTime.now());
         member.setEmail(userProfile.getEmail());
         member.setFirst_name(userProfile.getFirst_name());
         member.setLast_name(userProfile.getLast_name());
@@ -161,6 +163,11 @@ public class MemberServiceImpl implements MemberService {
         errorResponse.setErrorCode(401);
         errorResponse.setErrorMessage("The credentials used are incorrect please try again.");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+    }
+
+    @Override
+    public ResponseEntity<?> getMembersAnalytics() throws Exception {
+        return null;
     }
 
 }
