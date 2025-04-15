@@ -5,10 +5,10 @@ export type Contribution = {
 
 
 export type ContributionDashboard = {
-  created_at: string;
-  modified_at: string;
-  contribution_id: number;
-  member_id: string;
+  createdAt: string;
+  modifiedAt: string;
+  memberId: string;
   amount: number;
-  total_contributions: number;
+  totalContributions: number;
+  fullName: string;
 };
